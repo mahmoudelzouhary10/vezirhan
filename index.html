@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>خان الوزير إميرجان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
+:root{
+  --gold:#b8973a;--gold-l:#d4b05a;--gold-d:#8a6e28;
+  --ink:#0f0e0c;--ink2:#1a1814;
+  --cream:#f7f3ec;--cream-d:#ede8df;
+  --muted:#7a7060;--border:#ddd6c8;
+}
+body{font-family:'Helvetica Neue',Arial,'Segoe UI',Tahoma,sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;transition:all .3s}
+
+/* RTL/LTR */
+[data-lang="ar"]{direction:rtl;text-align:right}
+[data-lang="en"],[data-lang="tr"]{direction:ltr;text-align:left}
+
+/* Arabic typography */
+[data-lang="ar"] body,
+[data-lang="ar"] p,
+[data-lang="ar"] span,
+[data-lang="ar"] a,
+[data-lang="ar"] button,
+[data-lang="ar"] input,
+[data-lang="ar"] select,
+[data-lang="ar"] .body-text,
+[data-lang="ar"] .nav-links,
+[data-lang="ar"] .nav-right,
+[data-lang="ar"] .info-text,
+[data-lang="ar"] .mi-desc,
+[data-lang="ar"] .footer-col,
+[data-lang="ar"] .stat-label,
+[data-lang="ar"] .eyebrow,
+[data-lang="ar"] .badge-txt,
+[data-lang="ar"] .hours-day,
+[data-lang="ar"] .lang-btn,
+[data-lang="ar"] .menu-tab,
+[data-lang="ar"] .btn-gold,
+[data-lang="ar"] .btn-ghost,
+[data-lang="ar"] .nav-cta,
+[data-lang="ar"] .res-label,
+[data-lang="ar"] .book-note {
+  font-family: 'Noto Naskh Arabic', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.9;
+}
+
+/* Headings & display text — Amiri for elegance */
+[data-lang="ar"] h1,
+[data-lang="ar"] h2,
+[data-lang="ar"] .h2,
+[data-lang="ar"] .hero-h1,
+[data-lang="ar"] .nav-brand-name,
+[data-lang="ar"] .footer-brand-name,
+[data-lang="ar"] .mi-name,
+[data-lang="ar"] .info-title,
+[data-lang="ar"] .stat-num,
+[data-lang="ar"] .badge-num,
+[data-lang="ar"] .mi-price,
+[data-lang="ar"] .hours-time {
+  font-family: 'Amiri', Georgia, serif;
+}
+
+/* LANG SWITCHER */
+.lang-bar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  gap:4px;padding:6px 16px;
+  border-bottom:1px solid rgba(184,151,58,.2);
+  max-width:100vw;
+  overflow:hidden;
+}
+.lang-btn{
+  padding:4px 14px;font-size:11px;font-weight:500;
+  letter-spacing:.08em;border:1px solid rgba(255,255,255,.15);
+  background:transparent;color:rgba(255,255,255,.45);
+  cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.lang-btn.active,.lang-btn:hover{
+  background:var(--gold);color:var(--ink);border-color:var(--gold);
+}
+.lang-sep{color:rgba(255,255,255,.15);font-size:12px;user-select:none}
+
+/* NAV */
+nav{
+  position:fixed;top:32px;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 52px;height:64px;
+  background:rgba(15,14,12,.93);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(184,151,58,.2);
+  max-width:100vw;
+  overflow:hidden;
+}
+.nav-links{display:flex;gap:28px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.nav-links a{text-decoration:none;color:inherit;transition:color .2s}
+.nav-links a:hover{color:var(--gold-l)}
+.nav-brand{text-align:center;text-decoration:none}
+.nav-brand-name{font-family:Georgia,serif;font-size:20px;font-weight:600;letter-spacing:.1em;color:#fff;display:block}
+.nav-brand-sub{font-size:9px;font-weight:400;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;display:block;margin-top:2px}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-right a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.nav-right a:hover{color:var(--gold-l)}
+.nav-cta{padding:8px 20px;border:1px solid var(--gold);color:var(--gold)!important;transition:all .2s!important}
+.nav-cta:hover{background:var(--gold)!important;color:var(--ink)!important}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:680px;overflow:hidden;margin-top:96px}
+.hero-bg{position:absolute;inset:0;background:url('images/vezirhanrestoran_14050208_072406280.jpg') center/cover no-repeat;animation:zoomOut 12s ease forwards}
+@keyframes zoomOut{from{transform:scale(1.06)}to{transform:scale(1)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,9,7,.78) 0%,rgba(10,9,7,.28) 60%,rgba(10,9,7,.62) 100%)}
+.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 76px}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;animation:fadeUp .8s ease .2s both}
+.hero-tag::before,.hero-tag::after{content:'';width:36px;height:1px;background:var(--gold);opacity:.6}
+.hero-h1{font-family:Georgia,serif;font-size:clamp(48px,6.5vw,86px);font-weight:300;line-height:1.05;color:#fff;letter-spacing:.02em;animation:fadeUp .8s ease .4s both}
+.hero-h1 em{font-style:italic;color:var(--gold-l);font-weight:400}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.58);max-width:400px;margin-top:18px;line-height:1.8;animation:fadeUp .8s ease .6s both}
+.hero-actions{display:flex;gap:14px;margin-top:36px;animation:fadeUp .8s ease .8s both}
+.btn-gold{padding:13px 34px;background:var(--gold);color:var(--ink);font-size:11px;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;font-weight:500;transition:all .25s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-ghost{padding:12px 34px;background:transparent;color:#fff;font-size:11px;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(255,255,255,.35);cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.hero-stats{position:absolute;bottom:44px;display:flex;gap:44px;align-items:flex-end;animation:fadeUp .8s ease 1s both}
+[data-lang="ar"] .hero-stats{right:76px}
+[data-lang="en"] .hero-stats,[data-lang="tr"] .hero-stats{left:76px}
+.stat-num{font-family:Georgia,serif;font-size:34px;font-weight:300;color:var(--gold-l);line-height:1}
+.stat-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:4px}
+.hero-div{width:1px;height:44px;background:rgba(255,255,255,.12)}
+.scroll-hint{position:absolute;bottom:44px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);writing-mode:vertical-rl;display:flex;flex-direction:column;align-items:center;gap:8px}
+[data-lang="ar"] .scroll-hint{left:44px}
+[data-lang="en"] .scroll-hint,[data-lang="tr"] .scroll-hint{right:44px}
+.scroll-hint::after{content:'';width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 2s ease infinite}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* RES BAR */
+.res-bar{background:var(--ink2);padding:24px 52px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid rgba(184,151,58,.18)}
+.res-label{font-family:Georgia,serif;font-size:17px;color:var(--gold-l);font-style:italic;white-space:nowrap;margin-inline-end:8px}
+.res-bar select,.res-bar input{background:rgba(255,255,255,.06);border:1px solid rgba(184,151,58,.22);color:rgba(255,255,255,.72);padding:9px 14px;font-family:inherit;font-size:12px;outline:none;flex:1;min-width:130px;transition:border-color .2s}
+.res-bar select:focus,.res-bar input:focus{border-color:var(--gold)}
+.res-bar select option{background:var(--ink2)}
+input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.6) sepia(1) saturate(3) hue-rotate(5deg);cursor:pointer}
+
+/* SECTIONS */
+.section{padding:92px 76px}
+.eyebrow{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+[data-lang="ar"] .eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+[data-lang="en"] .eyebrow::after,[data-lang="tr"] .eyebrow::after{content:'';width:28px;height:1px;background:var(--gold)}
+.h2{font-family:Georgia,serif;font-size:clamp(30px,4vw,52px);font-weight:400;line-height:1.1;color:var(--ink)}
+.h2 em{font-style:italic;color:var(--gold-d)}
+.h2-light{color:#fff}.h2-light em{color:var(--gold-l)}
+.body-text{font-size:14px;line-height:1.85;color:var(--muted);max-width:490px}
+.link-more{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:22px;text-decoration:none;transition:gap .2s}
+.link-more:hover{gap:14px}
+[data-lang="ar"] .link-more::before{content:'→'}
+[data-lang="en"] .link-more::after,[data-lang="tr"] .link-more::after{content:'→'}
+
+/* STORY */
+.story{display:grid;grid-template-columns:1fr 1fr;background:var(--cream)}
+.story-text{padding:92px 68px;display:flex;flex-direction:column;justify-content:center}
+.story-media{position:relative;overflow:hidden}
+.story-media img{width:100%;height:100%;min-height:540px;object-fit:cover;transition:transform .8s}
+.story-media:hover img{transform:scale(1.04)}
+.story-badge{position:absolute;bottom:36px;background:var(--ink);padding:18px 24px;border-inline-start:3px solid var(--gold)}
+[data-lang="ar"] .story-badge{left:-18px}
+[data-lang="en"] .story-badge,[data-lang="tr"] .story-badge{right:-18px}
+.badge-num{font-family:Georgia,serif;font-size:40px;color:var(--gold-l);font-weight:300;line-height:1}
+.badge-txt{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
+
+/* MENU SECTION */
+.menu-section{background:var(--ink);padding:92px 76px}
+.menu-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px}
+.menu-tabs{display:flex;gap:4px}
+.menu-tab{padding:8px 18px;background:transparent;border:1px solid rgba(184,151,58,.28);color:rgba(255,255,255,.38);font-size:10px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:all .2s}
+.menu-tab.active,.menu-tab:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05)}
+.menu-item{background:var(--ink);padding:26px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:18px;transition:background .2s;border-bottom:1px solid rgba(255,255,255,.04)}
+.menu-item:hover{background:rgba(184,151,58,.05)}
+.mi-name{font-family:Georgia,serif;font-size:17px;color:#fff;margin-bottom:5px}
+.mi-desc{font-size:12px;color:rgba(255,255,255,.32);line-height:1.6;max-width:280px}
+.mi-price{font-family:Georgia,serif;font-size:19px;color:var(--gold-l);white-space:nowrap;flex-shrink:0;font-weight:300}
+
+/* BOSPHORUS */
+.bosphorus{position:relative;height:540px;overflow:hidden;display:flex;align-items:center}
+.bosphorus-bg{position:absolute;inset:0;background:url('images/vezirhanrestoran_14050208_071511850.jpg') center/cover no-repeat}
+.bosphorus-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,9,7,.88) 40%,rgba(10,9,7,.18) 100%)}
+[data-lang="ar"] .bosphorus-overlay{background:linear-gradient(to left,rgba(10,9,7,.88) 40%,rgba(10,9,7,.18) 100%)}
+.bosphorus-content{position:relative;padding:0 76px;max-width:580px}
+
+/* EVENTS */
+.events{display:grid;grid-template-columns:1fr 1fr;background:var(--cream-d)}
+.events-img{overflow:hidden}
+.events-img img{width:100%;height:100%;min-height:500px;object-fit:cover;transition:transform .7s}
+.events-img:hover img{transform:scale(1.04)}
+.events-text{padding:76px 68px;display:flex;flex-direction:column;justify-content:center}
+
+/* GALLERY */
+.gallery{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+grid-auto-rows:250px;
+gap:4px;
+grid-auto-flow:dense;
+}
+
+.gallery div{
+overflow:hidden;
+position:relative;
+}
+
+.gallery div img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+transition:transform .6s;
+filter:saturate(.85);
+}
+
+.gallery div:hover img{
+transform:scale(1.06);
+filter:saturate(1.1);
+}
+
+.gallery div:nth-child(1){
+grid-row:span 2;
+grid-column:span 2;
+}
+
+.gallery div:nth-child(5){
+grid-column:span 2;
+}
+
+/* INFO */
+.info-section{background:var(--ink2);display:grid;grid-template-columns:1fr 1fr 1fr}
+.info-col{padding:60px 48px;border-inline-end:1px solid rgba(255,255,255,.06)}
+.info-col:last-child{border-inline-end:none}
+.info-label{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.info-title{font-family:Georgia,serif;font-size:26px;color:#fff;font-weight:300;margin-bottom:18px;line-height:1.2;white-space:pre-line}
+.info-text{font-size:13px;color:rgba(255,255,255,.42);line-height:2}
+.info-text a{color:rgba(255,255,255,.42);text-decoration:none;transition:color .2s}
+.info-text a:hover{color:var(--gold-l)}
+.hours-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.hours-day{color:rgba(255,255,255,.42)}
+.hours-time{font-family:Georgia,serif;font-size:14px;color:var(--gold-l)}
+.hours-note{font-size:11px;color:rgba(255,255,255,.22);margin-top:16px;line-height:1.8;white-space:pre-line}
+
+/* BOOK */
+.book-section{background:var(--cream);padding:92px 76px;text-align:center}
+.ornament{display:flex;align-items:center;justify-content:center;gap:14px;padding:0 0 24px}
+.ornament::before,.ornament::after{content:'';flex:1;max-width:110px;height:1px;background:linear-gradient(to right,transparent,var(--gold))}
+.ornament::after{background:linear-gradient(to left,transparent,var(--gold))}
+.book-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:860px;margin:0 auto 0}
+.book-form input,.book-form select{border:1px solid var(--border);background:#fff;padding:12px 16px;font-family:inherit;font-size:12px;color:var(--ink);outline:none;flex:1;min-width:150px;transition:border-color .2s}
+.book-form input:focus,.book-form select:focus{border-color:var(--gold)}
+.book-note{margin-top:18px;font-size:12px;color:var(--muted)}
+.book-note a{color:var(--gold-d);text-decoration:none}
+.salad-wrap{display:flex;justify-content:center;margin-top:36px}
+.salad-wrap img{width:210px;height:210px;object-fit:cover;border-radius:50%;box-shadow:0 12px 44px rgba(0,0,0,.14)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:68px 76px 36px;border-top:1px solid rgba(184,151,58,.18)}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:52px;gap:24px;flex-wrap:wrap}
+.footer-brand-name{font-family:Georgia,serif;font-size:26px;color:#fff;font-weight:400;letter-spacing:.07em}
+.footer-brand-sub{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+.footer-social{display:flex;gap:14px;margin-top:18px}
+.footer-social a{width:34px;height:34px;border:1px solid rgba(184,151,58,.28);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.38);font-size:11px;text-decoration:none;transition:all .2s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+.footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.footer-col h4{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.footer-col p,.footer-col a{font-size:13px;color:rgba(255,255,255,.38);line-height:2;text-decoration:none;display:block}
+.footer-col a:hover{color:rgba(255,255,255,.68)}
+.footer-newsletter{display:flex;margin-top:12px}
+.footer-newsletter input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(184,151,58,.22);border-inline-end:none;padding:9px 12px;color:#fff;font-size:12px;font-family:inherit;outline:none}
+.footer-newsletter input::placeholder{color:rgba(255,255,255,.22)}
+.footer-newsletter button{background:var(--gold);color:var(--ink);border:none;padding:9px 16px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s}
+.footer-newsletter button:hover{background:var(--gold-l)}
+.footer-bottom{margin-top:52px;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:11px;color:rgba(255,255,255,.18)}
+.footer-bottom a{color:rgba(255,255,255,.18);text-decoration:none}
+
+/* RESPONSIVE — TABLET */
+@media(max-width:1024px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .section,.res-bar,.menu-section,.book-section,footer{padding-inline:28px}
+  .hero-content{padding:0 28px}
+  .hero-stats{inset-inline:28px!important;gap:20px}
+  .story,.events{grid-template-columns:1fr}
+  .story-media img{min-height:320px}
+  .events-img img{min-height:320px}
+  .story-text,.events-text{padding:52px 28px}
+  .bosphorus-content{padding:0 28px}
+  .menu-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:200px}
+  .gallery div:nth-child(1),.gallery div:nth-child(5){grid-row:auto;grid-column:auto}
+  .info-section{grid-template-columns:1fr}
+  .info-col{border-inline-end:none;border-bottom:1px solid rgba(255,255,255,.06);padding:44px 28px}
+  .footer-cols{grid-template-columns:1fr;gap:28px}
+  .footer-top{flex-direction:column}
+  .menu-header{flex-direction:column;gap:18px;align-items:flex-start}
+}
+
+/* RESPONSIVE — MOBILE */
+@media(max-width:768px){
+  /* Fix lang-bar + nav overlap */
+  .lang-bar{padding:5px 10px;gap:3px}
+  .lang-btn{padding:4px 10px;font-size:10px}
+
+  /* Nav: stack brand only, hide phone number */
+  nav{
+    padding:0 16px;
+    height:auto;
+    min-height:52px;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:6px;
+    padding-top:8px;
+    padding-bottom:8px;
+  }
+  .nav-brand-name{font-size:16px}
+  .nav-brand-sub{font-size:8px;letter-spacing:.18em}
+  /* Hide phone text, keep only CTA button */
+  .nav-right a:not(.nav-cta){display:none}
+  .nav-right{gap:10px}
+  .nav-cta{padding:6px 14px;font-size:10px}
+
+  /* Recalculate hero margin (lang-bar ~32px + nav ~68px) */
+  .hero{margin-top:100px;min-height:calc(100vh - 100px)}
+
+  /* Hero content */
+  .hero-content{padding:0 20px;justify-content:flex-end;padding-bottom:140px}
+  .hero-h1{font-size:clamp(32px,9vw,48px)}
+  .hero-sub{font-size:13px;max-width:100%}
+  .hero-actions{flex-direction:column;gap:10px;width:100%}
+  .btn-gold,.btn-ghost{width:100%;text-align:center;padding:13px 20px}
+
+  /* Hero stats: scroll horizontally on mobile */
+  .hero-stats{
+    bottom:20px;
+    left:20px!important;right:20px!important;
+    gap:0;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:4px;
+  }
+  .stat-num{font-size:24px}
+  .stat-label{font-size:8px;white-space:nowrap}
+  .hero-div{width:1px;min-width:1px;height:36px;flex-shrink:0;margin:0 14px}
+
+  /* Res bar */
+  .res-bar{
+    flex-direction:column;
+    padding:20px 16px;
+    gap:10px;
+  }
+  .res-bar select,.res-bar input{width:100%;min-width:unset;flex:none}
+  .res-label{margin-bottom:4px}
+
+  /* Sections */
+  .section{padding:60px 20px}
+  .menu-section{padding:60px 20px}
+  .book-section{padding:60px 20px}
+
+  /* Story */
+  .story-text{padding:44px 20px}
+  .story-badge{bottom:20px}
+  [data-lang="ar"] .story-badge{left:20px}
+  [data-lang="en"] .story-badge,[data-lang="tr"] .story-badge{right:20px}
+  .story-media img{min-height:260px}
+
+  /* Menu */
+  .menu-item{flex-direction:column;gap:8px}
+  .mi-price{align-self:flex-end}
+  .menu-tabs{flex-wrap:wrap}
+  .menu-tab{font-size:9px;padding:6px 12px}
+
+  /* Bosphorus */
+  .bosphorus{height:420px}
+  .bosphorus-content{padding:0 20px;max-width:100%}
+  [data-lang="ar"] .bosphorus-overlay{background:linear-gradient(to bottom,rgba(10,9,7,.82) 0%,rgba(10,9,7,.5) 100%)}
+  .bosphorus-overlay{background:linear-gradient(to bottom,rgba(10,9,7,.82) 0%,rgba(10,9,7,.5) 100%)}
+
+  /* Events */
+  .events-text{padding:44px 20px}
+  .events-img img{min-height:240px}
+
+  /* Gallery */
+  .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:160px;gap:3px}
+
+  /* Info */
+  .info-col{padding:36px 20px}
+  .info-title{font-size:22px}
+
+  /* Book form */
+  .book-form{flex-direction:column}
+  .book-form input,.book-form select{min-width:unset;width:100%}
+  .salad-wrap img{width:160px;height:160px}
+
+  /* Footer */
+  footer{padding:48px 20px 28px}
+  .footer-cols{gap:24px}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+  .footer-bottom div{justify-content:center}
+}
+
+/* Extra small phones */
+@media(max-width:400px){
+  .hero-h1{font-size:28px}
+  .gallery{grid-template-columns:1fr;grid-auto-rows:200px}
+  .hero-stats{gap:0}
+  .hero-div{margin:0 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('ar')" data-for="ar">عربي</button>
+  <span class="lang-sep">|</span>
+  <button class="lang-btn" onclick="setLang('en')" data-for="en">English</button>
+  <span class="lang-sep">|</span>
+  <button class="lang-btn" onclick="setLang('tr')" data-for="tr">Türkçe</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-links">
+    <a href="#" data-t="nav_home">الرئيسية</a>
+    <a href="#story" data-t="nav_story">قصتنا</a>
+    <a href="#menu" data-t="nav_menu">القائمة</a>
+    <a href="#events" data-t="nav_events">المناسبات</a>
+    <a href="#contact" data-t="nav_contact">تواصل معنا</a>
+  </div>
+  <a class="nav-brand" href="#">
+    <span class="nav-brand-name" data-t="brand"> خان الوزير</span>
+    <span class="nav-brand-sub" data-t="brand_sub">إميرجان · البوسفور</span>
+  </a>
+  <div class="nav-right">
+    <a href="tel:+905321726415" data-t="nav_phone">+90 532 172 64 15</a>
+    <a href="#book" class="nav-cta" data-t="nav_reserve">احجز طاولة</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag" data-t="hero_tag">إميرجان · إسطنبول · منذ 2021</div>
+    <h1 class="hero-h1">
+      <span data-t="hero_h1_line1">حيث يلتقي</span><br/>
+      <em data-t="hero_h1_line2">البوسفور</em><br/>
+      <span data-t="hero_h1_line3">بمائدتك</span>
+    </h1>
+    <p class="hero-sub" data-t="hero_sub">مطبخ تركي وعالمي راقٍ مع إطلالة خلّابة على المضيق. مفتوح 24 ساعة — طوال أيام السنة.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-gold" data-t="hero_btn1">احجز طاولة</a>
+      <a href="vezirhan-menu.html" class="btn-ghost" data-t="hero_btn2">عرض القائمة</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num" data-t="stat1_num">4.3</div><div class="stat-label" data-t="stat1_label">تقييم جوجل</div></div>
+    <div class="hero-div"></div>
+    <div><div class="stat-num" data-t="stat2_num">24/7</div><div class="stat-label" data-t="stat2_label">مفتوح دائماً</div></div>
+    <div class="hero-div"></div>
+    <div><div class="stat-num" data-t="stat3_num">+5</div><div class="stat-label" data-t="stat3_label">سنوات من الخدمة</div></div>
+    <div class="hero-div"></div>
+    <div><div class="stat-num" data-t="stat4_num">2</div><div class="stat-label" data-t="stat4_label">فروع في إسطنبول</div></div>
+  </div>
+  <div class="scroll-hint" data-t="scroll">تمرير</div>
+</section>
+
+<!-- RES BAR -->
+<div class="res-bar">
+  <span class="res-label" data-t="res_label">حجز سريع</span>
+  <input type="date" id="res-date-main"/>
+  <select id="res-time-main">
+    <option data-t="res_time">🕐 اختر الوقت</option>
+    <option>00:00</option><option>01:00</option><option>02:00</option><option>03:00</option>
+    <option>04:00</option><option>05:00</option><option>06:00</option><option>07:00</option>
+    <option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option>
+    <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option>
+    <option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option>
+    <option>20:00</option><option>21:00</option><option>22:00</option><option>23:00</option>
+  </select>
+  <select id="guests-bar" onchange="toggleCustomGuests('guests-bar','custom-guests-bar')">
+    <option data-t="res_guests">👥 عدد الأشخاص</option>
+    <option>1</option><option>2</option><option>3</option><option>4</option>
+    <option>5</option><option>6</option><option>7</option><option>8</option>
+    <option value="other" data-t="other_opt">أخرى...</option>
+  </select>
+  <input type="number" id="custom-guests-bar" placeholder="..." min="1" style="display:none;max-width:100px"/>
+  <input type="text" data-placeholder-t="res_name" placeholder="اسمك"/>
+  <button class="btn-gold" data-t="res_btn">احجز الآن</button>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-text">
+    <div class="eyebrow" data-t="story_eye">قصتنا</div>
+    <h2 class="h2">
+      <span data-t="story_h2_1">طعم</span><br/>
+      <em data-t="story_h2_2">التراث العثماني</em><br/>
+      <span data-t="story_h2_3">على البوسفور</span>
+    </h2>
+    <p class="body-text" style="margin-top:20px" data-t="story_p1">متربّع في أحضان غابة إميرغان الشهيرة، يجمع  خان الوزير بين تقاليد المطبخ التركي والعربي الغنية.</p>
+    <p class="body-text" style="margin-top:14px" data-t="story_p2">بإطلالة لا مثيل لها على المضيق وخدمة دافئة على مدار الساعة.</p>
+    <a href="#" class="link-more" data-t="story_more">اكتشف المزيد</a>
+  </div>
+  <div class="story-media">
+    <img src="images/vezirhanrestoran_14050208_071500430.jpg" alt=""/>
+    <div class="story-badge">
+      <div class="badge-num">5+</div>
+      <div class="badge-txt" data-t="story_badge">سنوات من التميز</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div>
+      <div class="eyebrow" style="color:var(--gold)" data-t="menu_eye">قائمتنا</div>
+      <h2 class="h2 h2-light"><span data-t="menu_h2_1">مُعَدّ بـ</span> <em data-t="menu_h2_2">التقاليد</em></h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-t="menu_tab1">تركي</button>
+      <button class="menu-tab" data-t="menu_tab2">عربي</button>
+      <button class="menu-tab" data-t="menu_tab3">مأكولات بحرية</button>
+      <button class="menu-tab" data-t="menu_tab4">فطور</button>
+    </div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-item"><div><div class="mi-name">كباب أضنة / Adana Kebabı</div><div class="mi-desc">كباب مع فلفل حار 200gr / Kebab with hot pepper 200gr</div></div><div class="mi-price">₺980</div></div>
+    <div class="menu-item"><div><div class="mi-name">مشكل مازة باردة / Soğuk Meze Tabağı</div><div class="mi-desc">حمص، بابا غنوج، محمرة، ورق عنب، متبل (5 أنواع) / Hummus, Baba Ghanoush, Muhammara, Grape Leaves, Mutabbal</div></div><div class="mi-price">₺1150</div></div>
+    <div class="menu-item"><div><div class="mi-name">سمك مشوي / Izgara Balık</div><div class="mi-desc">بطاطا مقلية، مخلل 500gr / Fried potatoes, pickles 500gr</div></div><div class="mi-price">₺1350</div></div>
+    <div class="menu-item"><div><div class="mi-name">مشاوي مشكلة / Karışık Izgara</div><div class="mi-desc">شيش طاووق، كبابة، قطع لحم 300gr / Chicken skewers, kofta, meat pieces 300gr</div></div><div class="mi-price">₺1200</div></div>
+    <div class="menu-item"><div><div class="mi-name">فريكة بلحم الغنم / Kuzu Etli Frik</div><div class="mi-desc">مع خيار بلبن 250gr / With cucumber yogurt 250gr</div></div><div class="mi-price">₺1100</div></div>
+    <div class="menu-item"><div><div class="mi-name">شاكرية ورز / Şakriye ve Pirinç</div><div class="mi-desc">لبن، لحم موزات 250gr / Yogurt, lamb shank 250gr</div></div><div class="mi-price">₺1100</div></div>
+    <div class="menu-item"><div><div class="mi-name">كباب حلبي / Halep Kebabı</div><div class="mi-desc">كباب حلبي أصيل مشوي على الفحم 200gr / Authentic Aleppo-style grilled kebab 200gr</div></div><div class="mi-price">₺980</div></div>
+    <div class="menu-item"><div><div class="mi-name">لحمة بالعجين / Lahmacun</div><div class="mi-desc">عجينة رقيقة مع لحم الغنم والتوابل / Thin dough with spiced minced lamb</div></div><div class="mi-price">₺350</div></div>
+  </div>
+  <div style="text-align:center;margin-top:44px">
+    <a href="vezirhan-menu-multilang.html" class="btn-ghost" data-t="view_menu">عرض القائمة الكاملة</a>
+  </div>
+</section>
+
+<!-- BOSPHORUS -->
+<section class="bosphorus">
+  <div class="bosphorus-bg"></div>
+  <div class="bosphorus-overlay"></div>
+  <div class="bosphorus-content">
+    <div class="eyebrow" data-t="bos_eye">الإطلالة</div>
+    <h2 class="h2 h2-light"><span data-t="bos_h2_1">أيقونية إسطنبول</span><br/><em data-t="bos_h2_2">الطاولة الأيقونية</em></h2>
+    <p class="body-text" style="color:rgba(255,255,255,.52);margin-top:18px" data-t="bos_p">شاهد السفن تمخر المضيق مع غروب الشمس على الشاطئ الأوروبي.</p>
+    <a href="#book" class="link-more" style="color:var(--gold-l)" data-t="bos_btn">احجز إطلالتك</a>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="events-img">
+    <img src="images/vezirhanrestoran_14050208_071557615.jpg" alt=""/>
+  </div>
+  <div class="events-text">
+    <div class="eyebrow" data-t="events_eye">المناسبات الخاصة</div>
+    <h2 class="h2"><span data-t="events_h2_1">احتفل مع</span><br/><em data-t="events_h2_2">البوسفور خلفية لك</em></h2>
+    <p class="body-text" style="margin-top:20px" data-t="events_p1">من التجمعات العائلية الحميمة إلى المناسبات الكبرى.</p>
+    <p class="body-text" style="margin-top:12px" data-t="events_p2">سعة من 10 إلى 300 ضيف. قوائم طعام مخصصة.</p>
+    <a href="#contact" class="link-more" data-t="events_btn">خطط لمناسبتك</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <div><img src="images/vezirhanrestoran_14050208_071421113.jpg" alt=""/></div>
+  <div><img src="images/vezirhanrestoran_14050208_071423072.jpg" alt=""/></div>
+  <div><img src="images/vezirhanrestoran_14050208_071449907.jpg" alt=""/></div>
+  <div><img src="images/vezirhanrestoran_14050208_071424672.jpg" alt=""/></div>
+  <div><img src="images/vezirhanrestoran_14050208_071626382.jpg" alt=""/></div>
+  <div><img src="images/vezirhanrestoran_14050208_071431860.jpg" alt=""/></div>
+  <div><img src="images/vezirhanrestoran_14050208_071433395.jpg" alt=""/></div>
+  <div><img src="images/vezirhanrestoran_14050208_071440001.jpg" alt=""/></div>
+</div>
+
+<!-- INFO -->
+<div class="info-section" id="contact">
+  <div class="info-col">
+    <div class="info-label" data-t="hours_eye">ساعات العمل</div>
+    <div class="info-title" data-t="hours_title">دائماً&#10;مفتوح لك</div>
+    <div class="hours-row"><span class="hours-day" data-t="hours_label1">الاثنين – الجمعة</span><span class="hours-time" data-t="hours_val">24 ساعة</span></div>
+    <div class="hours-row"><span class="hours-day" data-t="hours_label2">السبت</span><span class="hours-time" data-t="hours_val">24 ساعة</span></div>
+    <div class="hours-row"><span class="hours-day" data-t="hours_label3">الأحد</span><span class="hours-time" data-t="hours_val">24 ساعة</span></div>
+    <div class="hours-row"><span class="hours-day" data-t="hours_label4">الأعياد</span><span class="hours-time" data-t="hours_val">24 ساعة</span></div>
+    <p class="hours-note" data-t="hours_note">البوفيه المفتوح للفطور&#10;متاح يوم الأحد من 10:00 حتى 2:00</p>
+  </div>
+  <div class="info-col">
+    <div class="info-label" data-t="addr_eye">موقعنا</div>
+    <div class="info-title" data-t="addr_title">إميرجان،&#10;إسطنبول</div>
+    <div class="info-text">
+      <p>Sakıp Sabancı Cd. No:88</p>
+      <p>34467 Sarıyer / İstanbul</p>
+      <p style="margin-top:14px"><a href="tel:+905321726415">+90 532 172 64 15</a></p>
+      <p><a href="mailto:vezir-han@hotmail.com">vezir-han@hotmail.com</a></p>
+    </div>
+    <a href="https://maps.app.goo.gl/i5KE2aFRPZesWGzP9" target="_blank" class="link-more" style="color:var(--gold);margin-top:18px" data-t="directions">احصل على الاتجاهات</a>
+  </div>
+  <div class="info-col">
+    <div class="info-label" data-t="follow_eye">تابعنا</div>
+    <div class="info-title" data-t="follow_title">ابقَ&#10;على تواصل</div>
+    <div class="info-text">
+      <a href="https://www.instagram.com/vezirhanrestoran/" target="_blank">@vezirhanrestoran</a>
+      <a href="#">Facebook — Vezir Han Restoran</a>
+    </div>
+    <div style="margin-top:26px">
+      <div class="info-label" data-t="newsletter_eye">النشرة البريدية</div>
+      <div class="footer-newsletter">
+        <input type="email" data-placeholder-t="newsletter_ph" placeholder="بريدك الإلكتروني"/>
+        <button data-t="newsletter_sub">اشترك</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK -->
+<section class="book-section" id="book">
+  <div class="ornament"><span style="color:var(--gold);font-size:16px">✦</span></div>
+  <div class="eyebrow" style="justify-content:center;margin-bottom:14px" data-t="book_eye">الحجوزات</div>
+  <h2 class="h2" style="margin-bottom:44px"><span data-t="book_h2_1">احجز طاولتك</span><br/><em data-t="book_h2_2">على البوسفور</em></h2>
+  <div class="book-form">
+    <input type="text" data-placeholder-t="book_name" placeholder="الاسم الكامل"/>
+    <input type="email" data-placeholder-t="book_email" placeholder="البريد الإلكتروني"/>
+    <input type="tel" data-placeholder-t="book_phone" placeholder="رقم الهاتف"/>
+    <input type="date" id="book-date"/>
+    <select id="book-time">
+      <option data-t="book_time">اختر الوقت</option>
+      <option>00:00</option><option>01:00</option><option>02:00</option><option>03:00</option>
+      <option>04:00</option><option>05:00</option><option>06:00</option><option>07:00</option>
+      <option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option>
+      <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option>
+      <option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option>
+      <option>20:00</option><option>21:00</option><option>22:00</option><option>23:00</option>
+    </select>
+    <select id="guests-book" onchange="toggleCustomGuests('guests-book','custom-guests-book')">
+      <option data-t="book_guests">عدد الضيوف</option>
+      <option>1</option><option>2</option><option>3</option><option>4</option>
+      <option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+      <option value="other" data-t="other_opt">أخرى...</option>
+    </select>
+    <input type="number" id="custom-guests-book" placeholder="..." min="1" style="display:none;width:100%"/>
+    <button class="btn-gold" style="width:100%;max-width:860px;padding:14px" data-t="book_btn">تأكيد الحجز</button>
+  </div>
+  <p class="book-note">
+    <span data-t="book_note_1">أو اتصل بنا مباشرة:</span>
+    <a href="tel:+905321726415"> +90 532 172 64 15</a> —
+    <span data-t="book_note_2">متاح 24 ساعة يومياً</span>
+  </p>
+  <div class="salad-wrap">
+    <img src="images/vezirhanrestoran_14050208_071630244.jpg" alt=""/>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name" data-t="footer_brand">  خان الوزير</div>
+      <div class="footer-brand-sub" data-t="footer_sub">إميرجان · البوسفور · إسطنبول</div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/vezirhanrestoran/" target="_blank">IG</a>
+        <a href="#">FB</a>
+        <a href="tel:+905321726415">☎</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4 data-t="footer_nav">التنقل</h4>
+      <a href="#story" data-t="nav_story">قصتنا</a>
+      <a href="#menu" data-t="nav_menu">القائمة</a>
+      <a href="#events" data-t="nav_events">المناسبات</a>
+      <a href="#book" data-t="nav_reserve">احجز طاولة</a>
+      <a href="#contact" data-t="nav_contact">تواصل معنا</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-t="footer_addr">العنوان</h4>
+      <p>Sakıp Sabancı Cd. No:88</p>
+      <p>34467 Sarıyer / İstanbul</p>
+      <p style="margin-top:10px"><a href="tel:+905321726415">+90 532 172 64 15</a></p>
+      <p><a href="mailto:vezir-han@hotmail.com">vezir-han@hotmail.com</a></p>
+    </div>
+    <div class="footer-col">
+      <h4 data-t="newsletter_eye">النشرة البريدية</h4>
+      <p>Stay updated with special offers and events.</p>
+      <div class="footer-newsletter" style="margin-top:14px">
+        <input type="email" data-placeholder-t="newsletter_ph" placeholder="بريدك الإلكتروني"/>
+        <button data-t="newsletter_sub">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-t="footer_rights">© 2026 خان الوزير إميرجان. جميع الحقوق محفوظة.</span>
+    <div style="display:flex;gap:20px">
+      <a href="#">Privacy</a>
+      <a href="vezirhan-menu.html" data-t="nav_menu">Menu</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── TRANSLATIONS ───────────────────────────────────────────
+const T = {
+ar:{brand:" خان الوزير",brand_sub:"إميرجان · البوسفور",nav_home:"الرئيسية",nav_story:"قصتنا",nav_menu:"القائمة",nav_events:"المناسبات",nav_contact:"تواصل معنا",nav_phone:"+90 532 172 64 15",nav_reserve:"احجز طاولة",hero_tag:"إميرغان · إسطنبول · منذ 2021",hero_h1_line1:"حيث يلتقي",hero_h1_line2:"البوسفور",hero_h1_line3:"بمائدتك",hero_sub:"مطبخ تركي وعالمي راقٍ مع إطلالة خلّابة على المضيق. مفتوح 24 ساعة — طوال أيام السنة.",hero_btn1:"احجز طاولة",hero_btn2:"عرض القائمة",stat1_label:"تقييم جوجل",stat2_label:"مفتوح دائماً",stat3_label:"سنوات من الخدمة",stat4_label:"فروع في إسطنبول",res_label:"حجز سريع",res_time:"🕐 اختر الوقت",res_guests:"👥 عدد الأشخاص",res_name:"اسمك",res_btn:"احجز الآن",other_opt:"أخرى...",story_eye:"قصتنا",story_h2_1:"طعم",story_h2_2:"التراث العثماني",story_h2_3:"على البوسفور",story_p1:"متربّع في أحضان غابة إميرغان الشهيرة، يجمع خان الوزير بين تقاليد المطبخ التركي والعربي الغنية. يُبدع طهاتنا كل طبق بشغف — من اللحوم المشوية ببطء وأسماك البوسفور الطازجة إلى مائدة الفطور السورية السخية.",story_p2:"بإطلالة لا مثيل لها على المضيق وخدمة دافئة على مدار الساعة، ندعوكم لتجربة إسطنبول كما يجب أن تُستمتع.",story_more:"اكتشف المزيد",story_badge:"سنوات من التميز",menu_eye:"قائمتنا",menu_h2_1:"مُعَدّ بـ",menu_h2_2:"التقاليد",menu_tab1:"تركي",menu_tab2:"عربي",menu_tab3:"مأكولات بحرية",menu_tab4:"فطور",view_menu:"عرض القائمة الكاملة",bos_eye:"الإطلالة",bos_h2_1:"أيقونية إسطنبول",bos_h2_2:"الطاولة الأيقونية",bos_p:"شاهد السفن تمخر المضيق مع غروب الشمس على الشاطئ الأوروبي. تمنحك شرفتنا بانوراما مفتوحة على البوسفور.",bos_btn:"احجز إطلالتك",events_eye:"المناسبات الخاصة",events_h2_1:"احتفل مع",events_h2_2:"البوسفور خلفية لك",events_p1:"من التجمعات العائلية الحميمة إلى المناسبات الكبرى، يوفر خان الوزير قاعات خاصة بإطلالة على المضيق. يتولى فريق المناسبات لدينا كل التفاصيل.",events_p2:"سعة من 10 إلى 300 ضيف. قوائم طعام مخصصة. طاقم يتحدث العربية والتركية والإنجليزية.",events_btn:"خطط لمناسبتك",book_eye:"الحجوزات",book_h2_1:"احجز طاولتك",book_h2_2:"على البوسفور",book_name:"الاسم الكامل",book_email:"البريد الإلكتروني",book_phone:"رقم الهاتف",book_date:"اختر التاريخ",book_time:"اختر الوقت",book_guests:"عدد الضيوف",book_btn:"تأكيد الحجز",book_note_1:"أو اتصل بنا مباشرة:",book_note_2:"متاح 24 ساعة يومياً",hours_eye:"ساعات العمل",hours_title:"دائماً\nمفتوح لك",hours_label1:"الاثنين – الجمعة",hours_label2:"السبت",hours_label3:"الأحد",hours_label4:"الأعياد",hours_val:"24 ساعة",hours_note:"البوفيه المفتوح للفطور\nمتاح يوم الاحد من 10:00 حتى 16:00",addr_eye:"موقعنا",addr_title:"إميرغان،\nإسطنبول",follow_eye:"تابعنا",follow_title:"ابقَ\nعلى تواصل",newsletter_eye:"النشرة البريدية",newsletter_sub:"اشترك",newsletter_ph:"بريدك الإلكتروني",footer_brand:"خان الوزير",footer_sub:"إميرجان · البوسفور · إسطنبول",footer_nav:"التنقل",footer_addr:"العنوان",footer_hours:"ساعات العمل",footer_rights:"© 2026 خان الوزير  إميرجان. جميع الحقوق محفوظة.",directions:"احصل على الاتجاهات",scroll:"تمرير"},
+
+en:{brand:"Vezir Han",brand_sub:"Emirgan · Bosphorus",nav_home:"Home",nav_story:"Our Story",nav_menu:"Menu",nav_events:"Events",nav_contact:"Contact",nav_phone:"+90 532 172 64 15",nav_reserve:"Reserve a Table",hero_tag:"Emirgan · Istanbul · Est. 2021",hero_h1_line1:"Where the",hero_h1_line2:"Bosphorus",hero_h1_line3:"meets your table",hero_sub:"Fine Turkish & World cuisine with a breathtaking view of the strait. Open 24 hours — every day of the year.",hero_btn1:"Reserve a Table",hero_btn2:"View Menu",stat1_label:"Google Rating",stat2_label:"Always Open",stat3_label:"Years of Service",stat4_label:"Istanbul Locations",res_label:"Quick Reservation",res_time:"🕐 Select Time",res_guests:"👥 Guests",res_name:"Your Name",res_btn:"Book Now",other_opt:"Other...",story_eye:"Our Story",story_h2_1:"A taste of",story_h2_2:"Ottoman heritage",story_h2_3:"on the Bosphorus",story_p1:"Nestled beneath the famous Emirgan Grove, Vezir Han brings together the rich culinary traditions of Turkish and Arabic cuisine. Our chefs craft every dish with passion — from slow-grilled meats and fresh Bosphorus fish to hearty Syrian breakfast spreads.",story_p2:"With an unrivalled view of the strait and warm, attentive service around the clock, we invite you to experience Istanbul as it was meant to be savoured.",story_more:"Discover more",story_badge:"Years of Excellence",menu_eye:"Our Menu",menu_h2_1:"Crafted with",menu_h2_2:"tradition",menu_tab1:"Turkish",menu_tab2:"Arabic",menu_tab3:"Seafood",menu_tab4:"Breakfast",view_menu:"View Full Menu",bos_eye:"The View",bos_h2_1:"Istanbul's most",bos_h2_2:"iconic table",bos_p:"Watch the ships glide through the strait as the sun sets over the European shore. Our terrace offers an unobstructed panorama of the Bosphorus.",bos_btn:"Reserve your view",events_eye:"Private Events",events_h2_1:"Celebrate with the",events_h2_2:"Bosphorus as backdrop",events_p1:"From intimate family gatherings to grand corporate events, Vezir Han offers exclusive private dining rooms overlooking the strait. Our dedicated events team handles every detail.",events_p2:"Capacity from 10 to 300 guests. Customised menus available. Arabic, Turkish and English-speaking staff.",events_btn:"Plan your event",book_eye:"Reservations",book_h2_1:"Book your table",book_h2_2:"by the Bosphorus",book_name:"Full Name",book_email:"Email Address",book_phone:"Phone Number",book_date:"Select Date",book_time:"Select Time",book_guests:"Number of Guests",book_btn:"Confirm Reservation",book_note_1:"Or call us directly:",book_note_2:"available 24 hours a day",hours_eye:"Opening Hours",hours_title:"Always\nopen for you",hours_label1:"Monday – Friday",hours_label2:"Saturday",hours_label3:"Sunday",hours_label4:"Holidays",hours_val:"Open 24h",hours_note:"Breakfast buffet available daily\nfrom 07:00 until 12:00",addr_eye:"Find Us",addr_title:"Emirgan,\nIstanbul",follow_eye:"Follow Us",follow_title:"Stay\nconnected",newsletter_eye:"Newsletter",newsletter_sub:"Subscribe",newsletter_ph:"Your e-mail address",footer_brand:"Vezir Han",footer_sub:"Emirgan · Bosphorus · Istanbul",footer_nav:"Navigation",footer_addr:"Address",footer_hours:"Hours",footer_rights:"© 2024 Vezir Han Emirgan. All rights reserved.",directions:"Get directions",scroll:"Scroll"},
+
+tr:{brand:"Vezir Han",brand_sub:"Emirgan · Boğaz",nav_home:"Ana Sayfa",nav_story:"Hikayemiz",nav_menu:"Menü",nav_events:"Etkinlikler",nav_contact:"İletişim",nav_phone:"+90 532 172 64 15",nav_reserve:"Rezervasyon",hero_tag:"Emirgan · İstanbul · 2021'dan beri",hero_h1_line1:"Boğaz'ın",hero_h1_line2:"Masanızla",hero_h1_line3:"Buluştuğu Yer",hero_sub:"Boğaz'ın nefes kesen manzarasıyla seçkin Türk ve dünya mutfağı. Yılın her günü 24 saat açık.",hero_btn1:"Rezervasyon",hero_btn2:"Menüyü Gör",stat1_label:"Google Puanı",stat2_label:"Her Zaman Açık",stat3_label:"Yıllık Deneyim",stat4_label:"İstanbul Şubesi",res_label:"Hızlı Rezervasyon",res_time:"🕐 Saat Seçin",res_guests:"👥 Kişi Sayısı",res_name:"Adınız",res_btn:"Rezervasyon Yap",other_opt:"Diğer...",story_eye:"Hikayemiz",story_h2_1:"Boğaz'da",story_h2_2:"Osmanlı mirası",story_h2_3:"lezzetleri",story_p1:"Emirgan Korusu'nun gölgesinde, Vezir Han Türk ve Arap mutfağının zengin geleneklerini bir araya getirir. Şeflerimiz her yemeği tutku ile hazırlar — yavaş pişmiş etlerden taze Boğaz balıklarına, doyurucu Suriye kahvaltılarına kadar.",story_p2:"Boğaz'ın eşsiz manzarası ve güler yüzlü 24 saat hizmetiyle, İstanbul'u tadılması gerektiği gibi deneyimlemeniz için sizi davet ediyoruz.",story_more:"Daha fazla keşfet",story_badge:"Yıllık Mükemmellik",menu_eye:"Menümüz",menu_h2_1:"Gelenekle",menu_h2_2:"hazırlanmış",menu_tab1:"Türk",menu_tab2:"Arap",menu_tab3:"Deniz Ürünleri",menu_tab4:"Kahvaltı",view_menu:"Tam Menüyü Gör",bos_eye:"Manzara",bos_h2_1:"İstanbul'un en",bos_h2_2:"ikonik masası",bos_p:"Güneş Avrupa kıyısında batarken gemilerin boğazdan geçişini izleyin. Terasımız, yüzyıllardır gezginlerin büyülendiği Boğaz panoramasını sunar.",bos_btn:"Manzaranızı rezerve edin",events_eye:"Özel Etkinlikler",events_h2_1:"Boğaz manzarasıyla",events_h2_2:"kutlayın",events_p1:"Samimi aile buluşmalarından büyük kurumsal etkinliklere, Vezir Han Boğaz'a bakan özel yemek salonları sunar. Etkinlik ekibimiz her detayla ilgilenir.",events_p2:"10 ile 300 kişi kapasitesi. Özel menüler mevcuttur. Arapça, Türkçe ve İngilizce konuşan personel.",events_btn:"Etkinliğinizi planlayın",book_eye:"Rezervasyon",book_h2_1:"Boğaz'da",book_h2_2:"masanızı rezerve edin",book_name:"Ad Soyad",book_email:"E-posta Adresi",book_phone:"Telefon Numarası",book_date:"Tarih Seçin",book_time:"Saat Seçin",book_guests:"Kişi Sayısı",book_btn:"Rezervasyonu Onayla",book_note_1:"Ya da doğrudan arayın:",book_note_2:"günde 24 saat ulaşılabilir",hours_eye:"Çalışma Saatleri",hours_title:"Sizin için\nhep açık",hours_label1:"Pazartesi – Cuma",hours_label2:"Cumartesi",hours_label3:"Pazar",hours_label4:"Tatiller",hours_val:"24 saat açık",hours_note:"Kahvaltı büfesi her gün\n07:00 - 12:00 saatleri arasında",addr_eye:"Bizi Bulun",addr_title:"Emirgan,\nİstanbul",follow_eye:"Bizi Takip Edin",follow_title:"Bağlantıda\nkalın",newsletter_eye:"Bülten",newsletter_sub:"Abone Ol",newsletter_ph:"E-posta adresiniz",footer_brand:"Vezir Han",footer_sub:"Emirgan · Boğaz · İstanbul",footer_nav:"Gezinme",footer_addr:"Adres",footer_hours:"Saatler",footer_rights:"© 2024 Vezir Han Emirgan. Tüm hakları saklıdır.",directions:"Yol tarifi al",scroll:"Kaydır"}
+};
+
+// ─── SET LANGUAGE ─────────────────────────────────────────
+function setLang(lang) {
+  const html = document.documentElement;
+  html.setAttribute('data-lang', lang);
+  html.setAttribute('lang', lang);
+  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+  // Update all text nodes with data-t
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    if (T[lang] && T[lang][key]) {
+      el.textContent = T[lang][key];
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-placeholder-t]').forEach(el => {
+    const key = el.getAttribute('data-placeholder-t');
+    if (T[lang] && T[lang][key]) el.placeholder = T[lang][key];
+  });
+
+  // Update page title
+  const titles = {ar:'خان الوزير إميرجان', en:'Vezir Han Emirgan', tr:'Vezir Han Emirgan'};
+  document.title = titles[lang];
+
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-for') === lang);
+  });
+
+  // Set today's date
+  const today = new Date().toISOString().split('T')[0];
+  ['res-date-main','book-date'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el){el.min = today; if(!el.value) el.value = today;}
+  });
+
+  // Save preference
+  try { localStorage.setItem('vh_lang', lang); } catch(e){}
+}
+
+// ─── MENU TABS ────────────────────────────────────────────
+document.querySelectorAll('.menu-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// ─── CUSTOM GUESTS ────────────────────────────────────────
+function toggleCustomGuests(selId, inpId) {
+  const sel = document.getElementById(selId);
+  const inp = document.getElementById(inpId);
+  if (!inp) return;
+  if (sel.value === 'other') { inp.style.display = 'block'; inp.focus(); }
+  else { inp.style.display = 'none'; inp.value = ''; }
+}
+
+// ─── NAV HIGHLIGHT ON SCROLL ─────────────────────────────
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  document.querySelectorAll('section[id],div[id]').forEach(s => {
+    if (window.scrollY >= s.offsetTop - 110) cur = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold-l)' : '';
+  });
+});
+
+// ─── INIT ─────────────────────────────────────────────────
+(function init() {
+  let saved = 'ar';
+  try { saved = localStorage.getItem('vh_lang') || 'ar'; } catch(e){}
+  setLang(saved);
+})();
+</script>
+</body>
+</html>

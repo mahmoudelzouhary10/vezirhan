@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>قائمة الطعام —  خان الوزير إميرجان</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --gold:#b8973a;--gold-l:#d4b05a;--gold-d:#8a6e28;
+  --ink:#0f0e0c;--ink2:#1a1814;--ink3:#242018;
+  --cream:#f7f3ec;--cream-d:#ede8df;
+  --muted:#7a7060;--border:#ddd6c8;
+}
+body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--cream-d)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* LANGUAGE SWITCHER */
+.lang-bar{background:var(--ink);border-bottom:1px solid rgba(184,151,58,.15);padding:8px 16px;display:flex;justify-content:center;gap:6px;position:sticky;top:0;z-index:200}
+.lang-btn{background:transparent;border:1px solid rgba(184,151,58,.3);color:rgba(255,255,255,.5);padding:5px 14px;font-size:12px;font-family:'Tajawal',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.06em;border-radius:2px}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold-l)}
+.lang-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:700}
+
+/* HERO */
+.hero{background:var(--ink2);padding:52px 24px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(184,151,58,.1) 0%,transparent 70%)}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:16px}
+.orn::before,.orn::after{content:'';flex:1;max-width:90px;height:1px;background:linear-gradient(to right,transparent,var(--gold))}
+.orn::after{background:linear-gradient(to left,transparent,var(--gold))}
+.orn span{color:var(--gold);font-size:16px}
+.hero-title{font-size:clamp(26px,6vw,46px);font-weight:700;color:var(--gold-l);line-height:1.2}
+.hero-en{font-family:'Cormorant Garamond',serif;font-size:clamp(12px,2.5vw,16px);color:rgba(255,255,255,.35);letter-spacing:.2em;text-transform:uppercase;margin-top:6px}
+.hero-sub{color:rgba(255,255,255,.3);font-size:13px;margin-top:10px}
+
+/* STICKY NAV */
+.cat-nav{position:sticky;top:41px;z-index:100;background:var(--ink);border-bottom:1px solid rgba(184,151,58,.2);overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-nav-inner{display:inline-flex;padding:0 8px}
+.cat-nav a{display:inline-block;padding:13px 14px;font-size:11.5px;font-weight:500;color:rgba(255,255,255,.4);text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.cat-nav a:hover,.cat-nav a.active{color:var(--gold-l);border-bottom-color:var(--gold)}
+
+/* SEARCH */
+.search-bar{background:var(--cream-d);padding:14px 20px;border-bottom:1px solid var(--border)}
+.search-wrap{position:relative;max-width:480px;margin:0 auto}
+.search-wrap svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#searchInput{width:100%;border:1px solid var(--border);background:#fff;padding:10px 40px 10px 14px;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--ink);outline:none;transition:border-color .2s}
+#searchInput:focus{border-color:var(--gold)}
+#searchInput::placeholder{color:var(--muted)}
+#noResults{text-align:center;padding:40px;color:var(--muted);font-size:15px;display:none}
+
+/* SECTIONS */
+.cat-section{padding:44px 20px 32px;border-bottom:1px solid var(--border)}
+.cat-section:nth-child(even){background:var(--cream-d)}
+.cat-section.dark{background:var(--ink2)}
+.cat-header{text-align:center;margin-bottom:28px}
+.cat-title{font-size:clamp(22px,5vw,34px);font-weight:700;color:var(--gold);margin-bottom:5px}
+.dark .cat-title{color:var(--gold-l)}
+.cat-sub{font-size:13px;color:var(--muted)}
+.dark .cat-sub{color:rgba(255,255,255,.35)}
+.cat-div{display:flex;align-items:center;gap:10px;margin:10px auto 0;max-width:260px}
+.cat-div::before,.cat-div::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold-d))}
+.cat-div::after{background:linear-gradient(to left,transparent,var(--gold-d))}
+.cat-div span{color:var(--gold-d);font-size:13px}
+
+/* ITEMS GRID */
+.items-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+@media(max-width:580px){.items-grid{grid-template-columns:1fr}}
+.menu-item{background:#fff;padding:16px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;transition:background .15s}
+.menu-item:hover{background:#fffcf5}
+.dark .menu-item{background:var(--ink3)}
+.dark .menu-item:hover{background:rgba(184,151,58,.07)}
+.menu-item.hidden{display:none}
+.item-name{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:3px}
+.dark .item-name{color:rgba(255,255,255,.85)}
+.item-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.dark .item-desc{color:rgba(255,255,255,.3)}
+.item-wt{font-size:11px;color:var(--gold-d);margin-top:2px;font-weight:500}
+.item-price{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--gold-d);white-space:nowrap;flex-shrink:0}
+.dark .item-price{color:var(--gold-l)}
+.lira{font-size:12px;color:var(--muted);font-weight:400}
+.dark .lira{color:rgba(255,255,255,.3)}
+
+/* PACKAGES */
+.pkg-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:580px){.pkg-grid{grid-template-columns:1fr}}
+.pkg-card{background:#fff;border:1px solid var(--border);padding:22px 18px;position:relative;transition:border-color .2s,box-shadow .2s}
+.pkg-card:hover{border-color:var(--gold);box-shadow:0 4px 18px rgba(184,151,58,.1)}
+.pkg-card.hidden{display:none}
+.pkg-badge{position:absolute;top:14px;left:14px;background:var(--gold);color:#fff;font-size:10px;padding:3px 9px;letter-spacing:.08em}
+.pkg-name{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:9px}
+.pkg-desc{font-size:12.5px;color:var(--muted);line-height:1.8}
+.pkg-price{margin-top:14px;display:flex;align-items:baseline;gap:4px}
+.pkg-num{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold-d);font-weight:600}
+.pkg-cur{font-size:13px;color:var(--muted)}
+
+/* DRINKS */
+.drinks-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+@media(max-width:700px){.drinks-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.drinks-grid{grid-template-columns:1fr}}
+.drink-item{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:background .15s}
+.drink-item:hover{background:#fffcf5}
+.drink-item.hidden{display:none}
+.dk-name{font-size:13.5px;font-weight:500;color:var(--ink)}
+.dk-det{font-size:11px;color:var(--muted);margin-top:2px}
+.dk-price{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold-d);font-weight:600;white-space:nowrap;flex-shrink:0}
+
+/* HOOKAH */
+.hookah-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+@media(max-width:560px){.hookah-grid{grid-template-columns:1fr 1fr}}
+.hk-item{background:var(--ink2);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.05)}
+.hk-item.hidden{display:none}
+.hk-name{font-size:13.5px;color:rgba(255,255,255,.8);font-weight:500}
+.hk-price{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold-l)}
+
+/* SUB LABEL */
+.sub-label{text-align:center;color:var(--gold-l);font-size:12px;letter-spacing:.14em;margin:24px 0 14px;text-transform:uppercase;opacity:.8}
+.dark .sub-label{color:var(--gold-l)}
+
+/* FOOTER */
+.menu-footer{background:var(--ink);padding:32px 20px;text-align:center}
+.menu-footer p{color:rgba(255,255,255,.3);font-size:12px;line-height:2.2}
+.menu-footer strong{color:var(--gold)}
+.menu-footer a{color:rgba(255,255,255,.3);text-decoration:none}
+.back-btn{display:inline-block;margin-top:16px;padding:10px 28px;border:1px solid rgba(184,151,58,.4);color:var(--gold);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .2s}
+.back-btn:hover{background:var(--gold);color:var(--ink)}
+
+/* LTR OVERRIDE */
+body.ltr{direction:ltr;text-align:left}
+body.ltr .search-wrap svg{right:auto;left:12px}
+body.ltr #searchInput{padding:10px 14px 10px 40px;direction:ltr}
+body.ltr .pkg-badge{left:auto;right:14px}
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE SWITCHER -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">العربية</button>
+  <button class="lang-btn" onclick="setLang('tr')" id="btn-tr">Türkçe</button>
+  <button class="lang-btn" onclick="setLang('en')" id="btn-en">English</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="orn"><span>✦</span></div>
+  <h1 class="hero-title" data-ar=" خان الوزير إميرجان" data-tr="Vezir Han Emirgan" data-en="Vezir Han Emirgan"> خان الوزير إميرجان</h1>
+  <p class="hero-en">Vezir Han Emirgan · Full Menu</p>
+  <p class="hero-sub" data-ar="Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; مفتوح 24 ساعة" data-tr="Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; 24 Saat Açık" data-en="Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; Open 24 Hours">Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; مفتوح 24 ساعة</p>
+</div>
+
+<!-- NAV -->
+<nav class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="#s1" data-ar="فطور مجموعات" data-tr="Kahvaltı Paketleri" data-en="Breakfast Sets">فطور مجموعات</a>
+    <a href="#s2" data-ar="فطور" data-tr="Kahvaltı" data-en="Breakfast">فطور</a>
+    <a href="#s3" data-ar="معجنات" data-tr="Börekler" data-en="Pastry">معجنات</a>
+    <a href="#s4" data-ar="مازة باردة" data-tr="Soğuk Mezeler" data-en="Cold Appetizers">مازة باردة</a>
+    <a href="#s5" data-ar="مازة ساخنة" data-tr="Sıcak Mezeler" data-en="Hot Appetizers">مازة ساخنة</a>
+    <a href="#s6" data-ar="مازة غربية" data-tr="Batı Mezeleri" data-en="Western Appetizers">مازة غربية</a>
+    <a href="#s7" data-ar="سلطات غربية" data-tr="Batı Salatalar" data-en="Western Salads">سلطات غربية</a>
+    <a href="#s8" data-ar="سلطات شرقية" data-tr="Doğu Salatalar" data-en="Eastern Salads">سلطات شرقية</a>
+    <a href="#s9" data-ar="مطبخ خان الوزير" data-tr="Vezirhan Mutfağı" data-en="Vezirhan Cuisine">مطبخ خان الوزير</a>
+    <a href="#s10" data-ar="مشاوي" data-tr="Izgara" data-en="Barbecue">مشاوي</a>
+    <a href="#s11" data-ar="أطباق عالمية" data-tr="Dünya Mutfağı" data-en="World Cuisine">أطباق عالمية</a>
+    <a href="#s12" data-ar="بيتزا" data-tr="Pizza" data-en="Pizza">بيتزا</a>
+    <a href="#s13" data-ar="مشروبات" data-tr="İçecekler" data-en="Drinks">مشروبات</a>
+    <a href="#s14" data-ar="حلويات" data-tr="Tatlılar" data-en="Desserts">حلويات</a>
+    <a href="#s15" data-ar="أرجيلة" data-tr="Nargile" data-en="Shisha">أرجيلة</a>
+  </div>
+</nav>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/></svg>
+    <input type="text" id="searchInput" placeholder="ابحث عن طبق أو مشروب..." data-ar="ابحث عن طبق أو مشروب..." data-tr="Yemek veya içecek ara..." data-en="Search for a dish or drink..."/>
+  </div>
+</div>
+<div id="noResults" data-ar="لا توجد نتائج مطابقة للبحث ☕" data-tr="Sonuç bulunamadı ☕" data-en="No results found ☕">لا توجد نتائج مطابقة للبحث ☕</div>
+
+<!-- ══════════════════════════════════════
+  1. فطور المجموعات
+══════════════════════════════════════ -->
+<section class="cat-section" id="s1">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="فطور المجموعات" data-tr="Kahvaltı Paketleri" data-en="Breakfast Sets">فطور المجموعات</h2>
+    <p class="cat-sub" data-ar="ابدأ يومك بطاقة متجددة" data-tr="Güne taze bir enerjiyle başlayın" data-en="Start your day with renewed energy">ابدأ يومك بطاقة متجددة</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="pkg-grid">
+    <div class="pkg-card menu-item">
+      <div class="pkg-badge" data-ar="8 أصناف" data-tr="8 Çeşit" data-en="8 Items">8 أصناف</div>
+      <div>
+        <div class="pkg-name" data-ar="8 أصناف رقم 1" data-tr="8 Çeşit No. 1" data-en="8 Items Set No. 1">8 أصناف رقم 1</div>
+        <div class="pkg-desc" data-ar="أجبان مشكلة / زيتون مشكل / صحن خضار / بيض / عيون / سجق مقلي / قشطة وعسل / بوريك بالخضار / خبز ساخن" data-tr="Karışık peynirler / Karışık zeytinler / Sebze tabağı / Yumurta / Sahanda yumurta / Kızarmış sosis / Kaymak ve bal / Sebzeli börek / Sıcak ekmek" data-en="Mixed cheeses / Mixed olives / Vegetable plate / Eggs / Fried eggs / Fried sausage / Cream and honey / Vegetable börek / Hot bread">أجبان مشكلة / زيتون مشكل / صحن خضار / بيض / عيون / سجق مقلي / قشطة وعسل / بوريك بالخضار / خبز ساخن</div>
+      </div>
+      <div class="pkg-price"><span class="pkg-num">1990</span><span class="pkg-cur">₺</span></div>
+    </div>
+    <div class="pkg-card menu-item">
+      <div>
+        <div class="pkg-name" data-ar="12 صنف رقم 1" data-tr="12 Çeşit No. 1" data-en="12 Items Set No. 1">12 صنف رقم 1</div>
+        <div class="pkg-desc" data-ar="أجبان مشكلة / زيتون / صحن خضار / بيضة عيون / سجق مقلي / قشطة وعسل / بوريك بالسجق عدد 2 / محمرة بالقشقوان / منقوشة لبنه / حلوم مشوي / لحوم باردة / لبنه" data-tr="Karışık peynirler / Zeytin / Sebze tabağı / Sahanda yumurta / Kızarmış sosis / Kaymak ve bal / Sosisli börek x2 / Muhammara ile kaşkaval / Labneli manakiş / Izgara hellim / Soğuk et / Labneh" data-en="Mixed cheeses / Olives / Vegetable plate / Fried eggs / Fried sausage / Cream and honey / Sausage börek x2 / Muhammara with kashkaval / Labneh manakeesh / Grilled halloumi / Cold cuts / Labneh">أجبان مشكلة / زيتون / صحن خضار / بيضة عيون / سجق مقلي / قشطة وعسل / بوريك بالسجق عدد 2 / محمرة بالقشقوان / منقوشة لبنه / حلوم مشوي / لحوم باردة / لبنه</div>
+      </div>
+      <div class="pkg-price"><span class="pkg-num">3600</span><span class="pkg-cur">₺</span></div>
+    </div>
+    <div class="pkg-card menu-item">
+      <div class="pkg-badge" data-ar="19 صنف" data-tr="19 Çeşit" data-en="19 Items">19 صنف</div>
+      <div>
+        <div class="pkg-name" data-ar="19 صنف رقم (1)" data-tr="19 Çeşit No. 1" data-en="19 Items Set No. 1">19 صنف رقم (1)</div>
+        <div class="pkg-desc" data-ar="اجبان مشكلة / زيتون / قشطة وعسل / صحن خضار / منقوشة لبنه / منقوشة محمرة وقشقوان / برك بالبسطرمة عدد4 / حلوم مشوي / حبش مدخن / لبنه / بيضة عيون / سجق مقلي / مامونية / معجوقة (محمرة) / مكدوس / حلاوة / مقالي مشكلة / منيمين / مربي" data-tr="Karışık peynirler / Zeytin / Kaymak ve bal / Sebze tabağı / Labneli manakiş / Muhammara-kaşkavallı manakiş / Pastırmalı börek x4 / Izgara hellim / Füme hindi / Labneh / Sahanda yumurta / Kızarmış sosis / Mamouniye / Majouka (muhammara) / Makdus / Helva / Karışık kızartmalar / Menemen / Reçel" data-en="Mixed cheeses / Olives / Cream and honey / Vegetable plate / Labneh manakeesh / Muhammara-kashkaval manakeesh / Pastrami börek x4 / Grilled halloumi / Smoked turkey / Labneh / Fried eggs / Fried sausage / Mamouniye / Majouka (muhammara) / Makdous / Halva / Mixed fried items / Menemen / Jam">اجبان مشكلة / زيتون / قشطة وعسل / صحن خضار / منقوشة لبنه / منقوشة محمرة وقشقوان / برك بالبسطرمة عدد4 / حلوم مشوي / حبش مدخن / لبنه / بيضة عيون / سجق مقلي / مامونية / معجوقة (محمرة) / مكدوس / حلاوة / مقالي مشكلة / منيمين / مربي</div>
+      </div>
+      <div class="pkg-price"><span class="pkg-num">5200</span><span class="pkg-cur">₺</span></div>
+    </div>
+    <div class="pkg-card menu-item">
+      <div class="pkg-badge" data-ar="8 أصناف" data-tr="8 Çeşit" data-en="8 Items">8 أصناف</div>
+      <div>
+        <div class="pkg-name" data-ar="8 أصناف رقم 2" data-tr="8 Çeşit No. 2" data-en="8 Items Set No. 2">8 أصناف رقم 2</div>
+        <div class="pkg-desc" data-ar="أجبان مشكلة / زيتون مشكل / صحن خضار / منيمين / شوكولا / حمص / فتة فلافل / مناقيش زعتر وجبنة" data-tr="Karışık peynirler / Karışık zeytinler / Sebze tabağı / Menemen / Çikolata / Humus / Falafel tattesi / Kekikli ve peynirli manakiş" data-en="Mixed cheeses / Mixed olives / Vegetable plate / Menemen / Chocolate / Hummus / Falafel fatteh / Zaatar and cheese manakeesh">أجبان مشكلة / زيتون مشكل / صحن خضار / منيمين / شوكولا / حمص / فتة فلافل / مناقيش زعتر وجبنة</div>
+      </div>
+      <div class="pkg-price"><span class="pkg-num">2200</span><span class="pkg-cur">₺</span></div>
+    </div>
+    <div class="pkg-card menu-item">
+      <div>
+        <div class="pkg-name" data-ar="12 صنف رقم 2" data-tr="12 Çeşit No. 2" data-en="12 Items Set No. 2">12 صنف رقم 2</div>
+        <div class="pkg-desc" data-ar="أجبان مشكلة / زيتون / صحن خضار / منيمين / شوكولا / حمص / فتة فلافل / منقوشة جبنة / منقوشة زعتر / بيض بالقاورما / بطاطا مقلية / دبس وطحينة" data-tr="Karışık peynirler / Zeytin / Sebze tabağı / Menemen / Çikolata / Humus / Falafel tattesi / Peynirli manakiş / Kekikli manakiş / Kavurmalı yumurta / Patates kızartması / Pekmez ve tahin" data-en="Mixed cheeses / Olives / Vegetable plate / Menemen / Chocolate / Hummus / Falafel fatteh / Cheese manakeesh / Zaatar manakeesh / Eggs with kavurma / French fries / Molasses and tahini">أجبان مشكلة / زيتون / صحن خضار / منيمين / شوكولا / حمص / فتة فلافل / منقوشة جبنة / منقوشة زعتر / بيض بالقاورما / بطاطا مقلية / دبس وطحينة</div>
+      </div>
+      <div class="pkg-price"><span class="pkg-num">3400</span><span class="pkg-cur">₺</span></div>
+    </div>
+    <div class="pkg-card menu-item">
+      <div class="pkg-badge" data-ar="19 صنف" data-tr="19 Çeşit" data-en="19 Items">19 صنف</div>
+      <div>
+        <div class="pkg-name" data-ar="19 صنف رقم 2" data-tr="19 Çeşit No. 2" data-en="19 Items Set No. 2">19 صنف رقم 2</div>
+        <div class="pkg-desc" data-ar="أجبان مشكلة / زيتون / صحن خضار / منيمين / شوكولا / حمص / فتة فلافل / منقوشة زعتر / منقوشة جبنة / بيض بالقاورما / بطاطا مقلية / دبس وطحينة / بركة جبنة / زيت وزعتر / بسطرمة / مربي / بيض مع البطاطا والجبنة / يلانجي باذنجان / قشطة وعسل" data-tr="Karışık peynirler / Zeytin / Sebze tabağı / Menemen / Çikolata / Humus / Falafel tattesi / Kekikli manakiş / Peynirli manakiş / Kavurmalı yumurta / Patates kızartması / Pekmez ve tahin / Peynirli börek / Yağ ve kekik / Pastırma / Reçel / Patates ve peynirli yumurta / Zeytinyağlı patlıcan / Kaymak ve bal" data-en="Mixed cheeses / Olives / Vegetable plate / Menemen / Chocolate / Hummus / Falafel fatteh / Zaatar manakeesh / Cheese manakeesh / Eggs with kavurma / French fries / Molasses and tahini / Cheese börek / Oil and zaatar / Pastrami / Jam / Eggs with potato and cheese / Yalanji eggplant / Cream and honey">أجبان مشكلة / زيتون / صحن خضار / منيمين / شوكولا / حمص / فتة فلافل / منقوشة زعتر / منقوشة جبنة / بيض بالقاورما / بطاطا مقلية / دبس وطحينة / بركة جبنة / زيت وزعتر / بسطرمة / مربي / بيض مع البطاطا والجبنة / يلانجي باذنجان / قشطة وعسل</div>
+      </div>
+      <div class="pkg-price"><span class="pkg-num">5100</span><span class="pkg-cur">₺</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  2. فطور
+══════════════════════════════════════ -->
+<section class="cat-section" id="s2">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="فطور" data-tr="Kahvaltı" data-en="Breakfast">فطور</h2>
+    <p class="cat-sub" data-ar="ابدأ يومك بطاقة متجددة 07:00-16:30" data-tr="Güne taze enerjiyle başlayın 07:00-16:30" data-en="Start your day with renewed energy 07:00-16:30">ابدأ يومك بطاقة متجددة 07:00-16:30</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="جبنة بيضاء" data-tr="Beyaz Peynir" data-en="White Cheese">جبنة بيضاء</div></div><div class="item-price">225<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="جبنة وزير خان" data-tr="Vezirhan Peynirleri" data-en="Vezirhan Cheeses">جبنة وزير خان</div></div><div class="item-price">450<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="جبنة مشكلة" data-tr="Karışık Peynirler" data-en="Mixed Cheeses">جبنة مشكلة</div></div><div class="item-price">340<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="جبنة بوراتا مع بندورة وبيستو" data-tr="Burrata Peyniri, Domatesli ve Pestolu" data-en="Burrata Cheese with Tomatoes and Pesto">جبنة بوراتا مع بندورة وبيستو</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فطيرة جبنة مع خضار" data-tr="Sebzeli Peynir Böreği" data-en="Cheese Pie with Vegetables">فطيرة جبنة مع خضار</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="لبنة" data-tr="Labneh" data-en="Labneh">لبنة</div></div><div class="item-price">230<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="لبنة مع زيت زيتون" data-tr="Labneh Topları" data-en="Labneh Balls">لبنة مع زيت زيتون</div></div><div class="item-price">230<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="قشور جبنة (قطعة)" data-tr="Peynir Dilimi (adet)" data-en="Cheese Flakes (piece)">قشور جبنة (قطعة)</div></div><div class="item-price">95<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فول (بليمون أو طحينة)" data-tr="Bakla (limon veya tahinli)" data-en="Fava Beans (with Lemon or Tahini)">فول (بليمون أو طحينة)</div></div><div class="item-price">280<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="صحن خضار" data-tr="Sebze Tabağı" data-en="Vegetable Plate">صحن خضار</div></div><div class="item-price">140<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="زيتون أسود" data-tr="Siyah Zeytin" data-en="Black Olives">زيتون أسود</div></div><div class="item-price">95<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="زيتون أخضر" data-tr="Yeşil Zeytin" data-en="Green Olives">زيتون أخضر</div></div><div class="item-price">95<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="زيتون أخضر مشوي" data-tr="Izgara Yeşil Zeytin" data-en="Grilled Green Olives">زيتون أخضر مشوي</div></div><div class="item-price">95<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="زيتون أخضر مكسر" data-tr="Kırık Yeşil Zeytin" data-en="Cracked Green Olives">زيتون أخضر مكسر</div></div><div class="item-price">95<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="محمرة" data-tr="Muhammara" data-en="Muhammara">محمرة</div></div><div class="item-price">230<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="زعتر بزيت زيتون" data-tr="Zeytinyağlı Kekik" data-en="Zaatar with Olive Oil">زعتر بزيت زيتون</div></div><div class="item-price">95<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيض عيون" data-tr="Sahanda Yumurta" data-en="Fried Eggs">بيض عيون</div></div><div class="item-price">170<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيض مسلوق" data-tr="Haşlanmış Yumurta" data-en="Boiled Eggs">بيض مسلوق</div></div><div class="item-price">150<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيض بالقاورما" data-tr="Kavurmalı Yumurta" data-en="Eggs with Kavurma">بيض بالقاورما</div></div><div class="item-price">390<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منيمين" data-tr="Menemen" data-en="Menemen">منيمين</div></div><div class="item-price">300<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيض مع سجق" data-tr="Sucuklu Yumurta" data-en="Eggs with Sausage">بيض مع سجق</div></div><div class="item-price">300<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيض مع البطاطا والجبنة" data-tr="Patates ve Peynirli Yumurta" data-en="Eggs with Potato and Cheese">بيض مع البطاطا والجبنة</div></div><div class="item-price">300<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سجق مقلي" data-tr="Kızarmış Sosis" data-en="Fried Sausage">سجق مقلي</div></div><div class="item-price">320<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حلوم مشوي" data-tr="Izgara Hellim" data-en="Grilled Halloumi">حلوم مشوي</div></div><div class="item-price">390<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص" data-tr="Humus" data-en="Hummus">حمص</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فتة فلافل" data-tr="Falafel Tattesi" data-en="Falafel Fatteh">فتة فلافل</div></div><div class="item-price">380<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مامونية" data-tr="Mamouniye" data-en="Mamouniye">مامونية</div></div><div class="item-price">280<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="دبس وطحينة" data-tr="Pekmez ve Tahin" data-en="Molasses and Tahini">دبس وطحينة</div></div><div class="item-price">160<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مربي" data-tr="Reçel" data-en="Jam">مربي</div></div><div class="item-price">80<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوكولاتة" data-tr="Çikolata" data-en="Chocolate">شوكولاتة</div></div><div class="item-price">100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="قشطة وعسل" data-tr="Kaymak ve Bal" data-en="Cream and Honey">قشطة وعسل</div></div><div class="item-price">230<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="زبدة" data-tr="Tereyağı" data-en="Butter">زبدة</div></div><div class="item-price">80<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مكدوس" data-tr="Makdus" data-en="Makdous">مكدوس</div></div><div class="item-price">195<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حلاوة" data-tr="Helva" data-en="Halva">حلاوة</div></div><div class="item-price">80<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بطاطا مقلية" data-tr="Patates Kızartması" data-en="French Fries">بطاطا مقلية</div></div><div class="item-price">220<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حبش مدخن" data-tr="Füme Hindi" data-en="Smoked Turkey">حبش مدخن</div></div><div class="item-price">280<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بسطرمة" data-tr="Pastırma" data-en="Pastrami">بسطرمة</div></div><div class="item-price">280<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مقالي مشكلة" data-tr="Karışık Kızartmalar" data-en="Mixed Fried Items">مقالي مشكلة</div></div><div class="item-price">390<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="خبز خان الوزير" data-tr="Vezirhan Ekmeği" data-en="Vezirhan Bread">خبز خان الوزير</div></div><div class="item-price">60<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="ماء كبير" data-tr="Büyük Su" data-en="Large Water">ماء كبير</div></div><div class="item-price">225<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  3. معجنات
+══════════════════════════════════════ -->
+<section class="cat-section" id="s3">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="معجنات" data-tr="Kahvaltı Böreği" data-en="Breakfast Pastry">معجنات</h2>
+    <p class="cat-sub" data-ar="أشهى المعجنات وأطيبها" data-tr="En lezzetli ve taze börekler" data-en="The most delicious and fresh pastries">أشهى المعجنات وأطيبها</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="لحمة بالعجين (لحم عجون)" data-tr="Hamurda Et (Lahmacun)" data-en="Meat in Dough (Lahmacun)">لحمة بالعجين (لحم عجون)</div></div><div class="item-price">350<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بورك بجبنة قشقوان" data-tr="Kaşkaval Börek" data-en="Kashkawan Börek">بورك بجبنة قشقوان</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بورك بالسجق" data-tr="Sosis Börek" data-en="Sausage Börek">بورك بالسجق</div></div><div class="item-price">620<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بورك بالبسطرمة" data-tr="Pastırma Börek" data-en="Pastrami Börek">بورك بالبسطرمة</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بورك رأس عصفور" data-tr="Kuş Başı Börek" data-en="Birds Head Börek"><div class="item-wt">120gr</div>بورك رأس عصفور</div></div><div class="item-price">680<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة قشقوان" data-tr="Kaşkaval Manakiş" data-en="Kashkaval Manakeesh">منقوشة قشقوان</div></div><div class="item-price">350<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة جبنة عكاوية" data-tr="Akawi Peynirli Manakiş" data-en="Akkawi Cheese Manakeesh">منقوشة جبنة عكاوية</div></div><div class="item-price">350<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة زعتر" data-tr="Kekikli Manakiş" data-en="Zaatar Manakeesh">منقوشة زعتر</div></div><div class="item-price">300<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة لبنة" data-tr="Labneli Manakiş" data-en="Labneh Manakeesh">منقوشة لبنة</div></div><div class="item-price">320<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة محمرة" data-tr="Muhammara Manakiş" data-en="Muhammara Manakeesh">منقوشة محمرة</div></div><div class="item-price">300<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة محمرة وقشقوان" data-tr="Muhammara ve Kaşkaval Manakiş" data-en="Muhammara and Kashkaval Manakeesh">منقوشة محمرة وقشقوان</div></div><div class="item-price">380<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="صفيحة لحم بالبندورة والبصل" data-tr="Kuzu Sfihası" data-en="Lamb Sfiha"><div class="item-wt">50gr</div>صفيحة لحم بالبندورة والبصل</div></div><div class="item-price">420<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة جبنة شامية" data-tr="Şami Peynirli Manakiş" data-en="Shami Cheese Manakeesh">منقوشة جبنة شامية</div></div><div class="item-price">295<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة سجق وقشقوان" data-tr="Sosis ve Kaşkaval Manakiş" data-en="Sausage and Kashkaval Manakeesh">منقوشة سجق وقشقوان</div></div><div class="item-price">480<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شرحات لحم على العجين" data-tr="Hamur Üzerinde Et Dilimleri" data-en="Meat Slices on Dough"><div class="item-wt">130gr</div>شرحات لحم على العجين</div></div><div class="item-price">690<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة دوبلكس زعتر مع جبنة" data-tr="Çift Kekik ve Peynirli Manakiş" data-en="Double Zaatar and Cheese Manakeesh">منقوشة دوبلكس زعتر مع جبنة</div></div><div class="item-price">450<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منقوشة دوبلكس لبنة مع زعتر" data-tr="Çift Labneh ve Kekikli Manakiş" data-en="Double Labneh and Zaatar Manakeesh">منقوشة دوبلكس لبنة مع زعتر</div></div><div class="item-price">450<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="صفيحة بدبس الرمان" data-tr="Nar Ekşili Sfihası" data-en="Sfiha with Pomegranate Molasses"><div class="item-wt">50gr</div>صفيحة بدبس الرمان</div></div><div class="item-price">350<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شرحات دجاج على العجين" data-tr="Hamur Üzerinde Tavuk Dilimleri" data-en="Chicken Slices on Dough"><div class="item-wt">135gr</div>شرحات دجاج على العجين</div></div><div class="item-price">480<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="خبز خان الوزير" data-tr="Vezirhan Ekmeği" data-en="Vezirhan Bread">خبز خان الوزير</div></div><div class="item-price">60<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شرحات بسطرمة على عجين" data-tr="Hamur Üzerinde Pastırma" data-en="Pastrami Slices on Dough">شرحات بسطرمة على عجين</div></div><div class="item-price">790<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  4. مازة باردة
+══════════════════════════════════════ -->
+<section class="cat-section" id="s4">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="مازة باردة" data-tr="Soğuk Mezeler" data-en="Cold Appetizers">مازة باردة</h2>
+    <p class="cat-sub" data-ar="نكهات تقليدية بلمسة باردة" data-tr="Soğuk bir dokunuşla geleneksel lezzetler" data-en="Traditional flavors with a cold touch">نكهات تقليدية بلمسة باردة</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص" data-tr="Humus" data-en="Hummus">حمص</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص بيروتي" data-tr="Beyrut Humusu" data-en="Beiruti Hummus"><div class="item-desc" data-ar="بندورة، بقدونس، ثوم" data-tr="Domates, maydanoz, sarımsak" data-en="Tomato, parsley, garlic">بندورة، بقدونس، ثوم</div>حمص بيروتي</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص بالبستو" data-tr="Pestolu Humus" data-en="Pesto Hummus">حمص بالبستو</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص بالشوندر" data-tr="Pancarlı Humus" data-en="Beetroot Hummus">حمص بالشوندر</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص حار" data-tr="Acılı Humus" data-en="Spicy Hummus">حمص حار</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص لحمة ناعمة" data-tr="Kıymalı Humus" data-en="Hummus with Ground Meat"><div class="item-wt">50gr</div>حمص لحمة ناعمة</div></div><div class="item-price">450<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="حمص راس العصفور" data-tr="Kuş Başı Etli Humus" data-en="Hummus with Bird's Head Meat"><div class="item-desc" data-ar="مع لحمة راس العصفور 50gr" data-tr="Kuş başı et ile 50gr" data-en="With bird's head meat 50gr">مع لحمة راس العصفور 50gr</div>حمص راس العصفور</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="متبل باذنجان" data-tr="Patlıcan Mutabbal" data-en="Eggplant Mutabbal">متبل باذنجان</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="متبل شمندر" data-tr="Pancar Mutabbal" data-en="Beet Mutabbal">متبل شمندر</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بابا غنوج" data-tr="Baba Ghanoush" data-en="Baba Ghanoush"><div class="item-desc" data-ar="باذنجان مشوي، فليفلة، بندورة، ثوم (24 ساعة)" data-tr="Izgara patlıcan, biber, domates, sarımsak (24 saat)" data-en="Grilled eggplant, bell pepper, tomato, garlic (24 hours)">باذنجان مشوي، فليفلة، بندورة، ثوم (24 ساعة)</div>بابا غنوج</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبة نية" data-tr="Çiğ Köfte (Gerçek)" data-en="Raw Kibbeh"><div class="item-desc" data-ar="لحم غنم تازة نيء، برغل" data-tr="Taze çiğ kuzu eti, bulgur" data-en="Fresh lamb meat (raw), bulgur">لحم غنم تازة نيء، برغل</div>كبة نية</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="محمرة" data-tr="Muhammara" data-en="Muhammara"><div class="item-desc" data-ar="فليفلة، كعك مطحون، زيت زيتون، طحينة (24 ساعة)" data-tr="Biber, öğütülmüş kek, zeytinyağı, tahin (24 saat)" data-en="Bell pepper, bread crumbs, olive oil, tahini (24 hours)">فليفلة، كعك مطحون، زيت زيتون، طحينة (24 ساعة)</div>محمرة</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="لبنة بيروتية" data-tr="Beyrut Labnehi" data-en="Beiruti Labneh"><div class="item-desc" data-ar="بندورة، بقدونس، ثوم (24 ساعة)" data-tr="Domates, maydanoz, sarımsak (24 saat)" data-en="Tomato, parsley, garlic (24 hours)">بندورة، بقدونس، ثوم (24 ساعة)</div>لبنة بيروتية</div></div><div class="item-price">325<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="ورق عنب بزيت يالنجي (4 قطع)" data-tr="Zeytinyağlı Asma Yaprağı (4 adet)" data-en="Yalanji Grape Leaves in Olive Oil (4 pieces)">ورق عنب بزيت يالنجي (4 قطع)</div></div><div class="item-price">350<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مخلل مشكل" data-tr="Karışık Turşu" data-en="Mixed Pickles">مخلل مشكل</div></div><div class="item-price">150<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مشكل مازة باردة (5 أنواع)" data-tr="Soğuk Meze Tabağı (5 çeşit)" data-en="Cold Mezze Platter (5 types)">مشكل مازة باردة (5 أنواع)</div></div><div class="item-price">1150<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مشكل مزة باردة (8 أنواع)" data-tr="Soğuk Meze Tabağı (8 çeşit)" data-en="Cold Mezze Platter (8 types)">مشكل مزة باردة (8 أنواع)</div></div><div class="item-price">1500<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مشكل مازة باردة (3 أنواع)" data-tr="Soğuk Meze Tabağı (3 çeşit)" data-en="Cold Mezze Platter (3 types)">مشكل مازة باردة (3 أنواع)</div></div><div class="item-price">880<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  5. مازة ساخنة
+══════════════════════════════════════ -->
+<section class="cat-section" id="s5">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="مازة ساخنة" data-tr="Sıcak Mezeler" data-en="Hot Appetizers">مازة ساخنة</h2>
+    <p class="cat-sub" data-ar="أطباق مازة ساخنة مميزة" data-tr="Özel sıcak meze yemekleri" data-en="Special hot appetizer dishes">أطباق مازة ساخنة مميزة</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="شوربة يقطين حارة" data-tr="Acılı Balkabağı Çorbası" data-en="Spicy Pumpkin Soup"><div class="item-desc" data-ar="زنجبيل، قرنفل، كركم، بندورة، ثوم، جزر" data-tr="Zencefil, karanfil, zerdeçal, domates, sarımsak, havuç" data-en="Ginger, cloves, turmeric, tomato, garlic, carrots">زنجبيل، قرنفل، كركم، بندورة، ثوم، جزر</div>شوربة يقطين حارة</div></div><div class="item-price">420<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوربة عدس" data-tr="Mercimek Çorbası" data-en="Lentil Soup">شوربة عدس</div></div><div class="item-price">320<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوربة فطر" data-tr="Mantar Çorbası" data-en="Mushroom Soup"><div class="item-desc" data-ar="كريمة / حليب / فطر" data-tr="Krema / süt / mantar" data-en="Cream / milk / mushroom">كريمة / حليب / فطر</div>شوربة فطر</div></div><div class="item-price">380<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوربة دجاج" data-tr="Tavuk Çorbası" data-en="Chicken Soup"><div class="item-desc" data-ar="دجاج / كريمة / حليب" data-tr="Tavuk / krema / süt" data-en="Chicken / cream / milk">دجاج / كريمة / حليب</div>شوربة دجاج</div></div><div class="item-price">380<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوربة البصل الفرنسية" data-tr="Fransız Soğan Çorbası" data-en="French Onion Soup">شوربة البصل الفرنسية</div></div><div class="item-price">480<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوربة الذرة" data-tr="Mısır Çorbası" data-en="Corn Soup"><div class="item-desc" data-ar="ذرة / حليب / كريمة" data-tr="Mısır / süt / krema" data-en="Corn / milk / cream">ذرة / حليب / كريمة</div>شوربة الذرة</div></div><div class="item-price">380<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="لحمة بالفطر" data-tr="Mantarlı Et" data-en="Meat with Mushrooms"><div class="item-desc" data-ar="لحمة راس عصفور، فطر فريش 120gr" data-tr="Kuş başı et, taze mantar 120gr" data-en="Lamb meat, fresh mushrooms 120gr">لحمة راس عصفور، فطر فريش 120gr</div>لحمة بالفطر</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فتة (زيت أو سمنة)" data-tr="Tatteh (Zeytinyağı veya Sade Yağ)" data-en="Fatteh (with Olive Oil or Ghee)">فتة (زيت أو سمنة)</div></div><div class="item-price">350<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فتة باللحمة الناعمة" data-tr="Kıymalı Tatteh" data-en="Fatteh with Ground Meat"><div class="item-wt">75gr</div>فتة باللحمة الناعمة</div></div><div class="item-price">480<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فتة باللحمة الموزات" data-tr="Kuzu İnciği Tatteh" data-en="Fatteh with Meat"><div class="item-wt">150gr</div>فتة باللحمة الموزات</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بطاطا مقلية" data-tr="Patates Kızartması" data-en="French Fries">بطاطا مقلية</div></div><div class="item-price">220<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بطاطا حارة" data-tr="Acılı Patates" data-en="Spicy Potatoes">بطاطا حارة</div></div><div class="item-price">250<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سمبوسك لحمة (قطعة)" data-tr="Etli Samosa (adet)" data-en="Meat Sambousk (piece)">سمبوسك لحمة (قطعة)</div></div><div class="item-price">110<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="رقائق جبنة (قطعة)" data-tr="Peynirli Çıtır (adet)" data-en="Cheese Wafers (piece)">رقائق جبنة (قطعة)</div></div><div class="item-price">90<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبة مقلية (قطعة)" data-tr="Kızarmış Kibbe (adet)" data-en="Fried Kibbeh (piece)"><div class="item-wt">50gr</div>كبة مقلية (قطعة)</div></div><div class="item-price">175<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبة مشوية (قطعة)" data-tr="Izgara Kibbe (adet)" data-en="Grilled Kibbeh (piece)"><div class="item-wt">50gr</div>كبة مشوية (قطعة)</div></div><div class="item-price">225<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبة صاجية (قطعة)" data-tr="Sac Kibbe (adet)" data-en="Saj Kibbeh (piece)"><div class="item-wt">75gr</div>كبة صاجية (قطعة)</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  6. مازة غربية
+══════════════════════════════════════ -->
+<section class="cat-section" id="s6">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="مازة غربية" data-tr="Batı Mezeleri" data-en="Western Appetizers">مازة غربية</h2>
+    <p class="cat-sub" data-ar="تجربة المازة الغربية الأصيلة" data-tr="Özgün Batı meze deneyimi" data-en="Authentic Western mezze experience">تجربة المازة الغربية الأصيلة</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="فريد موزريلا" data-tr="Fried Mozzarella" data-en="Fried Mozzarella">فريد موزريلا</div></div><div class="item-price">295<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بطاطا مقلية" data-tr="Patates Kızartması" data-en="French Fries">بطاطا مقلية</div></div><div class="item-price">220<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مشكل مازة غربي" data-tr="Karışık Batı Mezesi" data-en="Mixed Western Mezze">مشكل مازة غربي</div></div><div class="item-price">720<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  7. سلطات غربية
+══════════════════════════════════════ -->
+<section class="cat-section" id="s7">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="سلطات غربية" data-tr="Batı Salatalar" data-en="Western Salads">سلطات غربية</h2>
+    <p class="cat-sub" data-ar="تجربة منعشة مع السلطات الغربية" data-tr="Batı salatalarıyla ferahlatıcı bir deneyim" data-en="A refreshing experience with Western salads">تجربة منعشة مع السلطات الغربية</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة سيزار قريدس" data-tr="Karidesli Sezar Salatası" data-en="Shrimp Caesar Salad"><div class="item-desc" data-ar="خس، صوص، قريدس، بارميزان 5 قطع" data-tr="Marul, sos, karides, parmesan 5 parça" data-en="Lettuce, sauce, shrimp, parmesan 5 pieces">خس، صوص، قريدس، بارميزان 5 قطع</div>سلطة سيزار قريدس</div></div><div class="item-price">750<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة سيزار دجاج" data-tr="Tavuklu Sezar Salatası" data-en="Chicken Caesar Salad"><div class="item-desc" data-ar="خس، صوص، دجاج، بارميزان 130gr" data-tr="Marul, sos, tavuk, parmesan 130gr" data-en="Lettuce, sauce, chicken, parmesan 130gr">خس، صوص، دجاج، بارميزان 130gr</div>سلطة سيزار دجاج</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة بوراتا" data-tr="Burrata Salatası" data-en="Burrata Salad"><div class="item-desc" data-ar="جبنة بوراتا، بندورة كرزية، صوص بيستو، زيت زيتون" data-tr="Burrata peyniri, cherry domates, pesto sosu, zeytinyağı" data-en="Burrata cheese, cherry tomatoes, pesto sauce, olive oil">جبنة بوراتا، بندورة كرزية، صوص بيستو، زيت زيتون</div>سلطة بوراتا</div></div><div class="item-price">750<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة يونانية" data-tr="Yunan Salatası" data-en="Greek Salad"><div class="item-desc" data-ar="بندورة، خيار، فليفلة ملونة، جبنة فيتا، صوص فينغرت" data-tr="Domates, salatalık, renkli biber, feta peyniri, vinaigrette sosu" data-en="Tomato, cucumber, colored pepper, feta cheese, vinaigrette sauce">بندورة، خيار، فليفلة ملونة، جبنة فيتا، صوص فينغرت</div>سلطة يونانية</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة أفوكادو" data-tr="Avokado Salatası" data-en="Avocado Salad"><div class="item-desc" data-ar="أفوكادو، بندورة، بقدونس، بصل أحمر، صوص فينغرت" data-tr="Avokado, domates, maydanoz, kırmızı soğan, vinaigrette sosu" data-en="Avocado, tomato, parsley, red onion, vinaigrette sauce">أفوكادو، بندورة، بقدونس، بصل أحمر، صوص فينغرت</div>سلطة أفوكادو</div></div><div class="item-price">625<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  8. سلطات شرقية
+══════════════════════════════════════ -->
+<section class="cat-section" id="s8">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="سلطات شرقية" data-tr="Doğu Salatalar" data-en="Eastern Salads">سلطات شرقية</h2>
+    <p class="cat-sub" data-ar="سلطات شرقية صحية ولذيذة" data-tr="Sağlıklı ve lezzetli Doğu salatalar" data-en="Healthy and delicious eastern salads">سلطات شرقية صحية ولذيذة</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة شوبان" data-tr="Çoban Salatası" data-en="Shepherd's Salad"><div class="item-desc" data-ar="خيار ناعم، بندورة ناعمة، فليفلة ناعمة" data-tr="İnce doğranmış salatalık, domates, biber" data-en="Finely chopped cucumber, tomato, pepper">خيار ناعم، بندورة ناعمة، فليفلة ناعمة</div>سلطة شوبان</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="تبولة" data-tr="Tabule" data-en="Tabbouleh"><div class="item-desc" data-ar="بقدونس، برغل، بندورة" data-tr="Maydanoz, bulgur, domates" data-en="Parsley, bulgur, tomatoes">بقدونس، برغل، بندورة</div>تبولة</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فتوش" data-tr="Fettuş Salatası" data-en="Fattoush"><div class="item-desc" data-ar="خس، زيتون، خيار، بندورة، بقلة، نعناع، جبنة، خبز مقلي" data-tr="Marul, zeytin, salatalık, domates, semizotu, nane, peynir, kızarmış ekmek" data-en="Lettuce, olives, cucumber, tomato, purslane, mint, cheese, fried bread">خس، زيتون، خيار، بندورة، بقلة، نعناع، جبنة، خبز مقلي</div>فتوش</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة ناعمة" data-tr="İnce Salat" data-en="Fine Salad"><div class="item-desc" data-ar="خيار ناعم، بندورة ناعمة، خس، ليمون، بصل" data-tr="İnce doğranmış salatalık, domates, marul, limon, soğan" data-en="Fine cucumber, fine tomato, lettuce, lemon, onion">خيار ناعم، بندورة ناعمة، خس، ليمون، بصل</div>سلطة ناعمة</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة شمندر" data-tr="Pancar Salatası" data-en="Beet Salad"><div class="item-desc" data-ar="شمندر، بقدونس، ثوم، كمون، ليمون" data-tr="Pancar, maydanoz, sarımsak, kimyon, limon" data-en="Beetroot, parsley, garlic, cumin, lemon">شمندر، بقدونس، ثوم، كمون، ليمون</div>سلطة شمندر</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة موسمية" data-tr="Mevsim Salatası" data-en="Seasonal Salad"><div class="item-desc" data-ar="خس، خيار، بندورة، نعناع" data-tr="Marul, salatalık, domates, nane" data-en="Lettuce, cucumber, tomato, mint">خس، خيار، بندورة، نعناع</div>سلطة موسمية</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة جرجير" data-tr="Roka Salatası" data-en="Arugula Salad"><div class="item-desc" data-ar="جرجير، فطر فريش، بندورة، بصل حسب الرغبة" data-tr="Roka, taze mantar, domates, soğan (isteğe bağlı)" data-en="Arugula, fresh mushrooms, tomato, onion (optional)">جرجير، فطر فريش، بندورة، بصل حسب الرغبة</div>سلطة جرجير</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة خان الوزير" data-tr="Vezirhan Salatası" data-en="Vezirhan Salad"><div class="item-desc" data-ar="خيار، خس، جبنة حلوم، بندورة كرزية، زيتون، جوز، صوص" data-tr="Salatalık, marul, hellim peyniri, cherry domates, zeytin, ceviz, sos" data-en="Cucumber, lettuce, halloumi, cherry tomatoes, olives, walnuts, sauce">خيار، خس، جبنة حلوم، بندورة كرزية، زيتون، جوز، صوص</div>سلطة خان الوزير</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سلطة موسمية مع جبنة الماعز" data-tr="Keçi Peynirli Mevsim Salatası" data-en="Seasonal Salad with Goat Cheese"><div class="item-desc" data-ar="خس، خيار، بندورة، نعناع، جبنة الماعز" data-tr="Marul, salatalık, domates, nane, keçi peyniri" data-en="Lettuce, cucumber, tomato, mint, goat cheese">خس، خيار، بندورة، نعناع، جبنة الماعز</div>سلطة موسمية مع جبنة الماعز</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  9. مطبخ خان الوزير
+══════════════════════════════════════ -->
+<section class="cat-section" id="s9">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="مطبخ خان الوزير" data-tr="Vezirhan Mutfağı" data-en="Vezirhan Cuisine">مطبخ خان الوزير</h2>
+    <p class="cat-sub" data-ar="أطباق تقليدية من خان الوزير" data-tr="Vezirhan'ın geleneksel yemekleri" data-en="Traditional dishes from Vezirhan">أطباق تقليدية من خان الوزير</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="يبرق وكوسة بلحم الغنم" data-tr="Kuzu Etli Yaprak Sarması ve Kabak Dolması" data-en="Stuffed Grape Leaves and Zucchini with Lamb"><div class="item-wt">150gr</div>يبرق وكوسة بلحم الغنم</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="محاشي كوسة" data-tr="Kabak Dolması" data-en="Stuffed Zucchini">محاشي كوسة</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فوارغ-سندوانات-أبوات" data-tr="Piliç / Sandviç / Kapı Dolması" data-en="Chicken / Sandwiches / Stuffed Peppers"><div class="item-desc" data-ar="مقلية أو مسلوقة" data-tr="Kızarmış veya haşlanmış" data-en="Fried or boiled">مقلية أو مسلوقة</div>فوارغ-سندوانات-أبوات</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فريكة بلحم الغنم" data-tr="Kuzu Etli Frik" data-en="Freekeh with Lamb"><div class="item-desc" data-ar="مع خيار بلبن 250gr" data-tr="Yoğurtlu salatalık ile 250gr" data-en="With cucumber yogurt 250gr">مع خيار بلبن 250gr</div>فريكة بلحم الغنم</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فريكة بالدجاج" data-tr="Tavuklu Frik" data-en="Freekeh with Chicken"><div class="item-desc" data-ar="مع خيار بلبن 300gr" data-tr="Yoğurtlu salatalık ile 300gr" data-en="With cucumber yogurt 300gr">مع خيار بلبن 300gr</div>فريكة بالدجاج</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبسة بلحم الغنم" data-tr="Kuzu Etli Kabsa" data-en="Kabsa with Lamb"><div class="item-desc" data-ar="مع دقوس 250gr" data-tr="Dakusu ile 250gr" data-en="With daqoos 250gr">مع دقوس 250gr</div>كبسة بلحم الغنم</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبسة بالدجاج" data-tr="Tavuklu Kabsa" data-en="Kabsa with Chicken"><div class="item-desc" data-ar="مع دقوس 300gr" data-tr="Dakusu ile 300gr" data-en="With daqoos 300gr">مع دقوس 300gr</div>كبسة بالدجاج</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="مقلوبة" data-tr="Maklouba" data-en="Maklouba"><div class="item-desc" data-ar="موزات لحم، باذنجان، رز 250gr" data-tr="Kuzu incik, patlıcan, pirinç 250gr" data-en="Lamb shank, eggplant, rice 250gr">موزات لحم، باذنجان، رز 250gr</div>مقلوبة</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="جدي خان الوزير" data-tr="Vezirhan Kuzusu" data-en="Vezirhan Lamb"><div class="item-desc" data-ar="لحم موزات 350gr، بطاطا مقلية، رز، صوص لحم مع كزبرة خضراء" data-tr="Kuzu incik 350gr, patates kızartması, pirinç, yeşil kişnişli et sosu" data-en="Lamb shank 350gr, fried potatoes, rice, meat sauce with green coriander">لحم موزات 350gr، بطاطا مقلية، رز، صوص لحم مع كزبرة خضراء</div>جدي خان الوزير</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فخدة اسطنبولية" data-tr="İstanbul Kuzu Budu" data-en="Istanbul Lamb Leg"><div class="item-desc" data-ar="لحم موزات 350gr، بطاطا مقلية، رز، صوص بندورة" data-tr="Kuzu incik 350gr, patates kızartması, pirinç, domates sosu" data-en="Lamb shank 350gr, fried potatoes, rice, tomato sauce">لحم موزات 350gr، بطاطا مقلية، رز، صوص بندورة</div>فخدة اسطنبولية</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبة لبنية ورز" data-tr="Yoğurtlu Kibbe ve Pirinç" data-en="Kibbeh with Yogurt and Rice"><div class="item-desc" data-ar="لبن، لحم موزات 200gr، قطع كبة 3" data-tr="Yoğurt, kuzu incik 200gr, 3 kibbe parçası" data-en="Yogurt, lamb shank 200gr, 3 kibbeh pieces">لبن، لحم موزات 200gr، قطع كبة 3</div>كبة لبنية ورز</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شيش برك" data-tr="Şiş Börek (Çuçvara)" data-en="Shish Barak"><div class="item-desc" data-ar="عجين محشي لحمة ناعمة، كزبرة خضراء، لبن" data-tr="Kıymalı hamur, yeşil kişniş, yoğurt" data-en="Dough stuffed with ground meat, coriander, yogurt">عجين محشي لحمة ناعمة، كزبرة خضراء، لبن</div>شيش برك</div></div><div class="item-price">990<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شاكرية ورز" data-tr="Şakriye ve Pirinç" data-en="Shakriya with Rice"><div class="item-desc" data-ar="لبن، لحم موزات 250gr" data-tr="Yoğurt, kuzu incik 250gr" data-en="Yogurt, lamb shank 250gr">لبن، لحم موزات 250gr</div>شاكرية ورز</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شيخ المحشي كوسة ورز" data-tr="Kabak Şeyhi Dolması ve Pirinç" data-en="Stuffed Zucchini Sheikh with Rice"><div class="item-desc" data-ar="كوسا مع لحمة ناعمة" data-tr="Kıymalı kabak" data-en="Zucchini with ground meat">كوسا مع لحمة ناعمة</div>شيخ المحشي كوسة ورز</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="ملوخية ورز" data-tr="Mulukhiyah ve Pirinç" data-en="Mulukhiyah with Rice"><div class="item-desc" data-ar="ملوخية ورق، دجاج، رز" data-tr="Mulukhiyah yaprağı, tavuk, pirinç" data-en="Mulukhiyah leaves, chicken, rice">ملوخية ورق، دجاج، رز</div>ملوخية ورز</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب هندي مع رز" data-tr="Hint Kebabı ve Pirinç" data-en="Indian Kebab with Rice"><div class="item-desc" data-ar="لحمة ناعمة 200gr، بندورة، رز" data-tr="Kıyma 200gr, domates, pirinç" data-en="Ground meat 200gr, tomato, rice">لحمة ناعمة 200gr، بندورة، رز</div>كباب هندي مع رز</div></div><div class="item-price">1100<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="رز أبيض سادة" data-tr="Sade Beyaz Pirinç" data-en="Plain White Rice">رز أبيض سادة</div></div><div class="item-price">450<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سندويش طاووق" data-tr="Tavuk Sandviç" data-en="Chicken Sandwich"><div class="item-wt">200gr</div>سندويش طاووق</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كتف خروف مع فريكة أو رز أو كبسة" data-tr="Kuzu Omuzu, Frik veya Pirinç veya Kabsa" data-en="Lamb Shoulder with Freekeh, Rice or Kabsa"><div class="item-wt">2000gr</div>كتف خروف</div></div><div class="item-price">5900<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منسف 4 أشخاص" data-tr="4 Kişilik Mansaf" data-en="Mansaf for 4 Persons"><div class="item-wt">1000gr</div>منسف 4 أشخاص</div></div><div class="item-price">4400<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منسف 6 أشخاص" data-tr="6 Kişilik Mansaf" data-en="Mansaf for 6 Persons"><div class="item-wt">1500gr</div>منسف 6 أشخاص</div></div><div class="item-price">6600<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منسف 8 أشخاص" data-tr="8 Kişilik Mansaf" data-en="Mansaf for 8 Persons"><div class="item-wt">2000gr</div>منسف 8 أشخاص</div></div><div class="item-price">8800<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="منسف 10 أشخاص" data-tr="10 Kişilik Mansaf" data-en="Mansaf for 10 Persons"><div class="item-wt">2500gr</div>منسف 10 أشخاص</div></div><div class="item-price">11000<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="خاروف" data-tr="Kuzu" data-en="Whole Lamb"><div class="item-wt">18kg</div>خاروف</div></div><div class="item-price">38000<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="نصف خروف" data-tr="Yarım Kuzu" data-en="Half Lamb"><div class="item-wt">9kg</div>نصف خروف</div></div><div class="item-price">20000<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="ربع خروف" data-tr="Çeyrek Kuzu" data-en="Quarter Lamb"><div class="item-wt">4.5kg</div>ربع خروف</div></div><div class="item-price">10000<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  10. مشاوي
+══════════════════════════════════════ -->
+<section class="cat-section" id="s10">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="مشاوي" data-tr="Izgara" data-en="Barbecue">مشاوي</h2>
+    <p class="cat-sub" data-ar="أفضل اللحوم المشوية على الإطلاق" data-tr="Dünyanın en iyi ızgara etleri" data-en="The best grilled meats ever">أفضل اللحوم المشوية على الإطلاق</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="مشاوي مشكلة" data-tr="Karışık Izgara" data-en="Mixed Grill"><div class="item-desc" data-ar="شيش طاووق، كبابة، قطع لحم 300gr" data-tr="Tavuk şiş, köfte, et parçaları 300gr" data-en="Chicken skewers, kofta, meat pieces 300gr">شيش طاووق، كبابة، قطع لحم 300gr</div>مشاوي مشكلة</div></div><div class="item-price">1200<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب حلبي" data-tr="Halep Kebabı" data-en="Aleppo Kebab"><div class="item-wt">200gr</div>كباب حلبي</div></div><div class="item-price">980<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب بالفطر" data-tr="Mantarlı Kebap" data-en="Mushroom Kebab"><div class="item-desc" data-ar="فطر فريش مع الكباب 200gr" data-tr="Taze mantar ile kebap 200gr" data-en="Fresh mushrooms with kebab 200gr">فطر فريش مع الكباب 200gr</div>كباب بالفطر</div></div><div class="item-price">995<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب خشخاش" data-tr="Haşhaş Kebabı (Fırında)" data-en="Clay Pot Kebab"><div class="item-desc" data-ar="مع صوص بندورة، فليفلة 200gr" data-tr="Domates sosu, biber ile 200gr" data-en="With tomato sauce, pepper 200gr">مع صوص بندورة، فليفلة 200gr</div>كباب خشخاش</div></div><div class="item-price">980<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب بالجوز" data-tr="Cevizli Kebap" data-en="Walnut Kebab"><div class="item-wt">200gr</div>كباب بالجوز</div></div><div class="item-price">1050<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب باذنجان" data-tr="Patlıcanlı Kebap" data-en="Eggplant Kebab"><div class="item-wt">200gr</div>كباب باذنجان</div></div><div class="item-price">995<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب أضنة" data-tr="Adana Kebabı" data-en="Adana Kebab"><div class="item-desc" data-ar="كباب مع فلفل حار 200gr" data-tr="Acı biberli kebap 200gr" data-en="Kebab with hot pepper 200gr">كباب مع فلفل حار 200gr</div>كباب أضنة</div></div><div class="item-price">980<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب بالفستق" data-tr="Fıstıklı Kebap" data-en="Pistachio Kebab"><div class="item-wt">200gr</div>كباب بالفستق</div></div><div class="item-price">1050<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب بالكرز" data-tr="Vişneli Kebap" data-en="Cherry Kebab"><div class="item-desc" data-ar="كرات كباب مشوية، عصير كرز، بقدونس، قرفة، صنوبر 200gr" data-tr="Izgara köfte, kiraz suyu, maydanoz, tarçın, çam fıstığı 200gr" data-en="Grilled kofta balls, cherry juice, parsley, cinnamon, pine nuts 200gr">200gr</div>كباب بالكرز</div></div><div class="item-price">990<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="لحمة شقف غنم" data-tr="Kuzu Eti" data-en="Lamb Meat Pieces"><div class="item-wt">200gr</div>لحمة شقف غنم</div></div><div class="item-price">1150<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="ريش غنم 3 قطع" data-tr="Kuzu Kaburga (3 adet)" data-en="Lamb Ribs (3 pieces)">ريش غنم 3 قطع</div></div><div class="item-price">1390<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سمك مشوي" data-tr="Izgara Balık" data-en="Grilled Fish"><div class="item-desc" data-ar="بطاطا مقلية، مخلل 500gr" data-tr="Patates kızartması, turşu 500gr" data-en="Fried potatoes, pickles 500gr">بطاطا مقلية، مخلل 500gr</div>سمك مشوي</div></div><div class="item-price">1350<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب قصابية (كبة)" data-tr="Kibbe Kasabia" data-en="Kibbeh Kasabia"><div class="item-wt">200gr</div>كباب قصابية</div></div><div class="item-price">1050<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كبة على السيخ" data-tr="Şiş Üzerinde Kibbe" data-en="Kebap on the Skewer"><div class="item-wt">200gr</div>كبة على السيخ</div></div><div class="item-price">980<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فخارة لحمة مجرمشة خضار" data-tr="Sebzeli Kıtır Et Fırında" data-en="Crispy Lamb with Vegetables in Clay Pot"><div class="item-desc" data-ar="لحمة راس عصفور، خضار 200gr" data-tr="Kuş başı et, sebzeler 200gr" data-en="Lamb meat, vegetables 200gr">200gr</div>فخارة لحمة مجرمشة خضار</div></div><div class="item-price">1190<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب بالطحينة" data-tr="Tahinli Kebap" data-en="Tahini Kebab"><div class="item-wt">200gr</div>كباب بالطحينة</div></div><div class="item-price">970<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب معجوقة" data-tr="Majoqa Kebabı" data-en="Majoqa Kebab"><div class="item-desc" data-ar="كباب محشي فطر، فليفلة، جبنة موزريلا 200gr" data-tr="Mantar, biber, mozzarella peyniri doldurulmuş kebap 200gr" data-en="Kebab stuffed with mushrooms, bell peppers, mozzarella cheese 200gr">200gr</div>كباب معجوقة</div></div><div class="item-price">1200<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب بالفخار" data-tr="Fırın Kebabı" data-en="Clay Pot Kebab"><div class="item-desc" data-ar="كباب، بندورة وبصل مشوي 200gr" data-tr="Kebap, ızgara domates ve soğan 200gr" data-en="Kebab, grilled tomato and onion 200gr">200gr</div>كباب بالفخار</div></div><div class="item-price">970<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="ماريا عرايس" data-tr="Maria Arayes" data-en="Maria Arayes"><div class="item-desc" data-ar="كباب ضمن خبز مرقوق 150gr" data-tr="Yufka ekmeğinde kebap 150gr" data-en="Kebab within flatbread 150gr">كباب ضمن خبز مرقوق 150gr</div>ماريا عرايس</div></div><div class="item-price">750<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="طوشكا" data-tr="Toshka" data-en="Toshka"><div class="item-desc" data-ar="كباب ضمن خبز مرقوق، جبنة 150gr" data-tr="Yufka ekmeğinde kebap, peynir 150gr" data-en="Kebab within flatbread, cheese 150gr">كباب ضمن خبز مرقوق، جبنة 150gr</div>طوشكا</div></div><div class="item-price">750<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كباب مشكل 4 أشخاص" data-tr="4 Kişilik Karışık Izgara" data-en="Mixed Kebab for 4 People"><div class="item-wt">1000gr</div>كباب مشكل 4 أشخاص</div></div><div class="item-price">4800<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شيش طاووق" data-tr="Tavuk Şiş" data-en="Grilled Chicken Skewers"><div class="item-desc" data-ar="بطاطا مقلية، كريم ثوم، مخلل 200gr" data-tr="Patates kızartması, sarımsak sosu, turşu 200gr" data-en="Fried potatoes, garlic sauce, pickles 200gr">بطاطا مقلية، كريم ثوم، مخلل 200gr</div>شيش طاووق</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="نصف فروج على الفحم" data-tr="Izgara Yarım Tavuk" data-en="Half Chicken on the Grill"><div class="item-desc" data-ar="بطاطا مقلية، كريم ثوم، مخلل 900gr" data-tr="Patates kızartması, sarımsak sosu, turşu 900gr" data-en="Fried potatoes, garlic sauce, pickles 900gr">بطاطا مقلية، كريم ثوم، مخلل 900gr</div>نصف فروج على الفحم</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="خبز خان الوزير" data-tr="Vezirhan Ekmeği" data-en="Vezirhan Bread">خبز خان الوزير</div></div><div class="item-price">60<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  11. أطباق عالمية
+══════════════════════════════════════ -->
+<section class="cat-section" id="s11">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="أطباق عالمية" data-tr="Dünya Mutfağı" data-en="World Cuisine">أطباق عالمية</h2>
+    <p class="cat-sub" data-ar="أذواق من جميع أنحاء العالم" data-tr="Dünyanın dört bir yanından lezzetler" data-en="Flavors from around the world">أذواق من جميع أنحاء العالم</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="فتايل دجاج بصلصة الباربكيو (6 قطع)" data-tr="BBQ Soslu Tavuk Şeritleri (6 adet)" data-en="BBQ Strips (6 pieces)"><div class="item-desc" data-ar="فتايل دجاج، فليفلة، باربكيو، كريمة، بطاطا" data-tr="Tavuk şeritleri, biber, BBQ sosu, krema, patates" data-en="Chicken strips, bell peppers, BBQ sauce, cream, potato wedges">فتايل دجاج، فليفلة، باربكيو، كريمة، بطاطا</div>فتايل دجاج بصلصة الباربكيو</div></div><div class="item-price">620<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فتايل دجاج بصلصة البوفالو (6 قطع)" data-tr="Buffalo Soslu Tavuk Şeritleri (6 adet)" data-en="Buffalo Strips (6 pieces)"><div class="item-desc" data-ar="فتايل دجاج، فليفلة، صوص صويا، بطاطا ويدجز" data-tr="Tavuk şeritleri, biber, soya sosu, patates wedge" data-en="Chicken strips, bell peppers, soya sauce, potato wedges">فتايل دجاج، فليفلة، صوص صويا، بطاطا ويدجز</div>فتايل دجاج بصلصة البوفالو</div></div><div class="item-price">620<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="اسكلوب ميلانيز" data-tr="Milanese Schnitzel" data-en="Milanese Escalope"><div class="item-desc" data-ar="دجاج، صوص بيتزا، فطر، جبنة موزاريلا 200gr" data-tr="Tavuk, pizza sosu, mantar, mozzarella peyniri 200gr" data-en="Grilled chicken, pizza sauce, mushrooms, mozzarella cheese 200gr">دجاج، صوص بيتزا، فطر، جبنة موزاريلا 200gr</div>اسكلوب ميلانيز</div></div><div class="item-price">920<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شيش طاووق بالفخارة" data-tr="Güveçte Tavuk Şiş" data-en="Grilled Chicken Skewer in Clay Pot"><div class="item-desc" data-ar="دجاج، فليفلة، فطر، ليمون، رز، جبنة 200gr" data-tr="Tavuk, biber, mantar, limon, pirinç, peynir 200gr" data-en="Grilled chicken, bell pepper, mushrooms, cheese, lemon, rice 200gr">دجاج، فليفلة، فطر، ليمون، رز، جبنة 200gr</div>شيش طاووق بالفخارة</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="تشيكن مشروم" data-tr="Mantarlı Tavuk" data-en="Chicken Mushroom"><div class="item-desc" data-ar="دجاج، فطر، كريمة فرش، بطاطا ويدجز 200gr" data-tr="Tavuk, mantar, taze krema, patates wedge 200gr" data-en="Grilled chicken, mushrooms, fresh cream, potato wedges 200gr">دجاج، فطر، كريمة فرش، بطاطا ويدجز 200gr</div>تشيكن مشروم</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="تشيكن اسكالوب" data-tr="Tavuk Schnitzel" data-en="Chicken Escalope"><div class="item-desc" data-ar="دجاج مقلي، بطاطا 200gr" data-tr="Kızarmış tavuk, patates 200gr" data-en="Fried chicken, potato wedges 200gr">دجاج مقلي، بطاطا 200gr</div>تشيكن اسكالوب</div></div><div class="item-price">820<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="تشيكن كوردون بلو" data-tr="Tavuk Cordon Bleu" data-en="Chicken Cordon Bleu"><div class="item-desc" data-ar="دجاج محشي جبنة وفطر، صوص بيشاميل، بطاطا 150gr" data-tr="Peynir ve mantar doldurulmuş tavuk, beşamel sos, patates 150gr" data-en="Chicken stuffed with cheese and mushrooms, béchamel sauce, 150gr potato wedges">دجاج محشي جبنة وفطر، صوص بيشاميل، بطاطا 150gr</div>تشيكن كوردون بلو</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="زنجر حار" data-tr="Acılı Zinger" data-en="Spicy Zinger"><div class="item-desc" data-ar="دجاج مقلي 250gr" data-tr="Kızarmış tavuk 250gr" data-en="Fried chicken 250gr">دجاج مقلي 250gr</div>زنجر حار</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="تشيكن كريسبي" data-tr="Crispy Tavuk" data-en="Crispy Chicken"><div class="item-desc" data-ar="فتائل دجاج مقلي، بطاطا 250gr" data-tr="Kızarmış tavuk şeritleri, patates 250gr" data-en="Fried chicken strips, potatoes 250gr">فتائل دجاج مقلي، بطاطا 250gr</div>تشيكن كريسبي</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="دجاج مع الصويا والعسل" data-tr="Soya ve Ballı Tavuk" data-en="Chicken with Soy and Honey"><div class="item-desc" data-ar="دجاج 150gr، فليفلة، صويا، عسل، رز" data-tr="Tavuk 150gr, biber, soya, bal, pirinç" data-en="Chicken 150gr, pepper, soy, honey, rice">دجاج 150gr، فليفلة، صويا، عسل، رز</div>دجاج مع الصويا والعسل</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شيدر بيف برغر" data-tr="Cheddar Beef Burger" data-en="Cheddar Beef Burger"><div class="item-desc" data-ar="لحم عجل، تشيدر، بطاطا ويدجز 180gr" data-tr="Dana eti, cheddar, patates wedge 180gr" data-en="Veal, cheddar, potato wedges 180gr">لحم عجل، تشيدر، بطاطا ويدجز 180gr</div>شيدر بيف برغر</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيف برغر الوزير" data-tr="Vezirhan Beef Burger" data-en="Vezirhan Beef Burger"><div class="item-desc" data-ar="لحمة عجل، تشيدر، صوص الوزير، بطاطا ويدجز 180gr" data-tr="Dana eti, cheddar, Vezirhan sosu, patates wedge 180gr" data-en="Veal, cheddar, Vezirhan sauce, potato wedges 180gr">لحمة عجل، تشيدر، صوص الوزير، بطاطا ويدجز 180gr</div>بيف برغر الوزير</div></div><div class="item-price">950<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كلاسيك تشيكن برغر" data-tr="Klasik Tavuk Burger" data-en="Classic Chicken Burger"><div class="item-desc" data-ar="دجاج مقلي، بطاطا 200gr" data-tr="Kızarmış tavuk, patates 200gr" data-en="Fried chicken, potatoes 200gr">دجاج مقلي، بطاطا 200gr</div>كلاسيك تشيكن برغر</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="موزاريلا تشيكن برغر" data-tr="Mozzarella Tavuk Burger" data-en="Mozzarella Chicken Burger"><div class="item-desc" data-ar="دجاج مقلي، جبنة موزاريلا، بطاطا 200gr" data-tr="Kızarmış tavuk, mozzarella peyniri, patates 200gr" data-en="Fried chicken, mozzarella cheese, potatoes 200gr">دجاج مقلي، جبنة موزاريلا، بطاطا 200gr</div>موزاريلا تشيكن برغر</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="برغر دجاج الوزير" data-tr="Vezirhan Tavuk Burger" data-en="Vezirhan Chicken Burger"><div class="item-desc" data-ar="دجاج مقلي، صوص الوزير، تشيدر، بطاطا 200gr" data-tr="Kızarmış tavuk, Vezirhan sosu, cheddar, patates 200gr" data-en="Fried chicken, Vezirhan sauce, cheddar, potatoes 200gr">دجاج مقلي، صوص الوزير، تشيدر، بطاطا 200gr</div>برغر دجاج الوزير</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  12. بيتزا
+══════════════════════════════════════ -->
+<section class="cat-section" id="s12">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="بيتزا" data-tr="Pizza" data-en="Pizza">بيتزا</h2>
+    <p class="cat-sub" data-ar="بيتزا طازجة بأصناف متعددة" data-tr="Çeşitli tatlarla taze pizza" data-en="Fresh pizza with various flavors">بيتزا طازجة بأصناف متعددة</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا مارغريتا" data-tr="Margherita Pizza" data-en="Margherita Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، موزريلا، بارميزان، ريحان" data-tr="Pesto, pizza sosu, mozzarella, parmesan, fesleğen" data-en="Pesto, pizza sauce, mozzarella, parmesan, basil">بيستو، صوص بيتزا، موزريلا، بارميزان، ريحان</div>بيتزا مارغريتا</div></div><div class="item-price">750<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا خضار" data-tr="Sebzeli Pizza" data-en="Vegetable Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، موزريلا، فليفلة، زيتون، فطر، بارميزان" data-tr="Pesto, pizza sosu, mozzarella, biber, zeytin, mantar, parmesan" data-en="Pesto, pizza sauce, mozzarella, pepper, olives, mushrooms, parmesan">بيستو، صوص بيتزا، موزريلا، فليفلة، زيتون، فطر، بارميزان</div>بيتزا خضار</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا تشيكن بربكيو" data-tr="BBQ Tavuk Pizza" data-en="BBQ Chicken Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، موزريلا، بارميزان، قطع دجاج بصوص الباربكيو 100gr" data-tr="Pesto, pizza sosu, mozzarella, parmesan, BBQ soslu tavuk parçaları 100gr" data-en="Pesto, pizza sauce, mozzarella, parmesan, BBQ chicken pieces 100gr">100gr</div>بيتزا تشيكن بربكيو</div></div><div class="item-price">880<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا بيبروني" data-tr="Pepperoni Pizza" data-en="Pepperoni Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، موزريلا، بارميزان، فليفلة، فطر، بيبروني 50gr" data-tr="Pesto, pizza sosu, mozzarella, parmesan, biber, mantar, pepperoni 50gr" data-en="Pesto, pizza sauce, mozzarella, parmesan, pepper, mushrooms, pepperoni 50gr">50gr</div>بيتزا بيبروني</div></div><div class="item-price">880<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="جبنة الخضار" data-tr="Sebzeli Peynirli Pizza" data-en="Vegetable Cheese Pizza"><div class="item-desc" data-ar="موزريلا، بارميزان، اوريكانو، ريحان، جبنة حلوم، فليفلة، زيتون" data-tr="Mozzarella, parmesan, kekik, fesleğen, hellim peyniri, biber, zeytin" data-en="Mozzarella, parmesan, oregano, basil, halloumi cheese, pepper, olives">موزريلا، بارميزان، اوريكانو، ريحان، جبنة حلوم، فليفلة، زيتون</div>جبنة الخضار</div></div><div class="item-price">850<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا بالسجق" data-tr="Sosis Pizza" data-en="Sausage Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، موزريلا، بارميزان، سجق 100gr، بندورة" data-tr="Pesto, pizza sosu, mozzarella, parmesan, sosis 100gr, domates" data-en="Pesto, pizza sauce, mozzarella, parmesan, sausage 100gr, tomato">100gr</div>بيتزا بالسجق</div></div><div class="item-price">920<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا بالبسطرمة" data-tr="Pastırma Pizza" data-en="Pastrami Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، موزريلا، بارميزان، بسطرمة 100gr" data-tr="Pesto, pizza sosu, mozzarella, parmesan, pastırma 100gr" data-en="Pesto, pizza sauce, mozzarella, parmesan, pastrami 100gr">100gr</div>بيتزا بالبسطرمة</div></div><div class="item-price">920<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا جبنة بارميزان" data-tr="Parmesan Peynirli Pizza" data-en="Parmesan Cheese Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، بارميزان، ريحان" data-tr="Pesto, pizza sosu, parmesan, fesleğen" data-en="Pesto, pizza sauce, parmesan, basil">بيستو، صوص بيتزا، بارميزان، ريحان</div>بيتزا جبنة بارميزان</div></div><div class="item-price">920<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بيتزا جبنة بوراتا مع بارميزان" data-tr="Burrata ve Parmesan Peynirli Pizza" data-en="Burrata and Parmesan Pizza"><div class="item-desc" data-ar="بيستو، صوص بيتزا، موزريلا، بارميزان، ريحان، جبنة بوراتا" data-tr="Pesto, pizza sosu, mozzarella, parmesan, fesleğen, burrata peyniri" data-en="Pesto, pizza sauce, mozzarella, parmesan, basil, burrata cheese">بيستو، صوص بيتزا، موزريلا، بارميزان، ريحان، جبنة بوراتا</div>بيتزا جبنة بوراتا مع بارميزان</div></div><div class="item-price">995<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  13. مشروبات
+══════════════════════════════════════ -->
+<section class="cat-section dark" id="s13">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="مشروبات" data-tr="İçecekler" data-en="Cold Drinks">مشروبات</h2>
+    <p class="cat-sub" data-ar="مشروبات متنوعة تناسب الجميع" data-tr="Herkese uygun çeşitli içecekler" data-en="Refreshing drinks for all times">مشروبات متنوعة تناسب الجميع</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <p class="sub-label" data-ar="— مشروبات غازية —" data-tr="— Gazlı İçecekler —" data-en="— Soft Drinks —">— مشروبات غازية —</p>
+  <div class="drinks-grid" style="margin-bottom:24px">
+    <div class="drink-item"><div><div class="dk-name">Coca-Cola</div><div class="dk-det">330ml</div></div><div class="dk-price">180₺</div></div>
+    <div class="drink-item"><div><div class="dk-name">Fanta</div><div class="dk-det">330ml</div></div><div class="dk-price">180₺</div></div>
+    <div class="drink-item"><div><div class="dk-name">Sprite</div><div class="dk-det">330ml</div></div><div class="dk-price">180₺</div></div>
+    <div class="drink-item"><div><div class="dk-name">Coca-Cola Zero</div><div class="dk-det">330ml</div></div><div class="dk-price">180₺</div></div>
+    <div class="drink-item"><div><div class="dk-name">Red Bull</div><div class="dk-det">250ml</div></div><div class="dk-price">240₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="عيران" data-tr="Ayran" data-en="Ayran">عيران</div><div class="dk-det">245ml</div></div><div class="dk-price">190₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="صودا" data-tr="Soda" data-en="Soda">صودا</div><div class="dk-det">200ml</div></div><div class="dk-price">190₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شاي بارد خوخ" data-tr="Şeftali Ice Tea" data-en="Peach Ice Tea">شاي بارد خوخ</div><div class="dk-det">330ml</div></div><div class="dk-price">180₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شاي بارد ليمون" data-tr="Lion Ice Tea" data-en="Lemon Ice Tea">شاي بارد ليمون</div><div class="dk-det">330ml</div></div><div class="dk-price">180₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="ماء" data-tr="Su" data-en="Water">ماء</div><div class="dk-det">330ml</div></div><div class="dk-price">95₺</div></div>
+  </div>
+  <p class="sub-label" data-ar="— مشروبات ساخنة —" data-tr="— Sıcak İçecekler —" data-en="— Hot Drinks —">— مشروبات ساخنة —</p>
+  <div class="drinks-grid" style="margin-bottom:24px">
+    <div class="drink-item"><div><div class="dk-name" data-ar="شاي" data-tr="Çay" data-en="Tea">شاي</div></div><div class="dk-price">95₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فنجان شاي" data-tr="Fincan Çay" data-en="Cup of Tea">فنجان شاي</div></div><div class="dk-price">110₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="إسبريسو" data-tr="Espresso" data-en="Espresso">إسبريسو</div></div><div class="dk-price">280₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="إسبريسو دبل" data-tr="Çift Espresso" data-en="Double Espresso">إسبريسو دبل</div></div><div class="dk-price">295₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كافيه أمريكانو" data-tr="Café Americano" data-en="Café Americano">كافيه أمريكانو</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كافيه موكا" data-tr="Café Mocha" data-en="Café Mocha">كافيه موكا</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="موكا بيضاء" data-tr="White Mocha" data-en="White Mocha">موكا بيضاء</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كابتشينو" data-tr="Cappuccino" data-en="Cappuccino">كابتشينو</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كورتادو" data-tr="Cortado" data-en="Cortado">كورتادو</div></div><div class="dk-price">300₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فلات وايت" data-tr="Flat White" data-en="Flat White">فلات وايت</div></div><div class="dk-price">300₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="قهوة فلتر" data-tr="Filter Kahve" data-en="Filter Coffee">قهوة فلتر</div></div><div class="dk-price">200₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="قهوة تركية" data-tr="Türk Kahvesi" data-en="Turkish Coffee">قهوة تركية</div></div><div class="dk-price">250₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شاي الشتاء" data-tr="Kış Çayı" data-en="Winter Tea">شاي الشتاء</div></div><div class="dk-price">220₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="زهرة الزيزفون" data-tr="Ihlamur" data-en="Linden Tea">زهرة الزيزفون</div></div><div class="dk-price">220₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شاي أخضر" data-tr="Yeşil Çay" data-en="Green Tea">شاي أخضر</div></div><div class="dk-price">220₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شاي مغربي" data-tr="Fas Çayı" data-en="Moroccan Tea">شاي مغربي</div></div><div class="dk-price">220₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شاي المانجو" data-tr="Mango Çayı" data-en="Mango Tea">شاي المانجو</div></div><div class="dk-price">220₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شوكولاتة ساخنة" data-tr="Sıcak Çikolata" data-en="Hot Chocolate">شوكولاتة ساخنة</div></div><div class="dk-price">240₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="ريستريتو" data-tr="Ristretto" data-en="Ristretto">ريستريتو</div></div><div class="dk-price">185₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كراميل لاتيه" data-tr="Karamel Latte" data-en="Caramel Latte">كراميل لاتيه</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فانيليا لاتيه" data-tr="Vanilya Latte" data-en="Vanilla Latte">فانيليا لاتيه</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سحلب" data-tr="Sahlep" data-en="Sahlep">سحلب</div></div><div class="dk-price">220₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="بستاشيو لاتيه" data-tr="Antep Fıstıklı Latte" data-en="Pistachio Latte">بستاشيو لاتيه</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="ماتشا لاتيه" data-tr="Matcha Latte" data-en="Matcha Latte">ماتشا لاتيه</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="ماكيتو" data-tr="Macchiato" data-en="Macchiato">ماكيتو</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سبانش لاتيه" data-tr="Spanish Latte" data-en="Spanish Latte">سبانش لاتيه</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="ترمس شاي" data-tr="Çay Termosu" data-en="Tea Thermos">ترمس شاي</div></div><div class="dk-price">800₺</div></div>
+  </div>
+  <p class="sub-label" data-ar="— مشروبات باردة —" data-tr="— Soğuk İçecekler —" data-en="— Cold Drinks —">— مشروبات باردة —</p>
+  <div class="drinks-grid">
+    <div class="drink-item"><div><div class="dk-name" data-ar="فراولة موجيتو" data-tr="Çilek Mojito" data-en="Strawberry Mojito">فراولة موجيتو</div><div class="dk-det" data-ar="فريز، نعناع، ليمون، سبرايت، ثلج" data-tr="Çilek, nane, limon, Sprite, buz" data-en="Strawberry, mint, lemon, Sprite, ice">فريز، نعناع، ليمون، سبرايت، ثلج</div></div><div class="dk-price">370₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="أناناسينو" data-tr="Ananasinno" data-en="Pineapple Mojito">أناناسينو</div></div><div class="dk-price">370₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="ريد بول موجيتو" data-tr="Red Bull Mojito" data-en="Red Bull Mojito">ريد بول موجيتو</div><div class="dk-det" data-ar="نعناع، ليمون، ريدبول، ثلج" data-tr="Nane, limon, Red Bull, buz" data-en="Mint, lemon, Red Bull, ice">نعناع، ليمون، ريدبول، ثلج</div></div><div class="dk-price">420₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="باشيون كينج" data-tr="Passion King" data-en="Passion King">باشيون كينج</div><div class="dk-det" data-ar="صوص باشيون، برتقال، ليمونادة، ثلج" data-tr="Passion sosu, portakal, limonata, buz" data-en="Passion sauce, orange, lemonade, ice">صوص باشيون، برتقال، ليمونادة، ثلج</div></div><div class="dk-price">420₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="آيس لاتيه فون" data-tr="Ice Latte Fon" data-en="Ice Latte Fon">آيس لاتيه فون</div><div class="dk-det" data-ar="حليب، سيروب يقطين" data-tr="Süt, balkabağı şurubu" data-en="Milk, pumpkin syrup">حليب، سيروب يقطين</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كافيه أمريكانو بارد" data-tr="Soğuk Americano" data-en="Iced Café Americano">كافيه أمريكانو بارد</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كافيه لاتيه بارد" data-tr="Soğuk Café Latte" data-en="Iced Café Latte">كافيه لاتيه بارد</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فلتر كوفي بارد" data-tr="Soğuk Filter Kahve" data-en="Iced Filter Coffee">فلتر كوفي بارد</div></div><div class="dk-price">200₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="موكا بارد" data-tr="Soğuk Mocha" data-en="Iced Mocha">موكا بارد</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="وايت موكا بارد" data-tr="Soğuk White Mocha" data-en="Iced White Mocha">وايت موكا بارد</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فرابي موكا" data-tr="Frappe Mocha" data-en="Frappé Mocha">فرابي موكا</div><div class="dk-det" data-ar="حليب، آيس كريم، شوكولا، كريم شانتيه" data-tr="Süt, dondurma, çikolata, çırpılmış krema" data-en="Milk, ice cream, chocolate, whipped cream">حليب، آيس كريم، شوكولا، كريم شانتيه</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فرابي كراميل" data-tr="Frappe Karamel" data-en="Frappé Caramel">فرابي كراميل</div><div class="dk-det" data-ar="حليب، كراميل، فانيلا، كريم شانتيه" data-tr="Süt, karamel, vanilya, çırpılmış krema" data-en="Milk, caramel, vanilla, whipped cream">حليب، كراميل، فانيلا، كريم شانتيه</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="آيس موكا" data-tr="Ice Mocha" data-en="Ice Mocha">آيس موكا</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="آيس لاتيه" data-tr="Ice Latte" data-en="Ice Latte">آيس لاتيه</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="آيس كراميل لاتيه" data-tr="Ice Karamel Latte" data-en="Ice Caramel Latte">آيس كراميل لاتيه</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="آيس فانيليا لاتيه" data-tr="Ice Vanilya Latte" data-en="Ice Vanilla Latte">آيس فانيليا لاتيه</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="عصير برتقال" data-tr="Portakal Suyu" data-en="Orange Juice">عصير برتقال</div></div><div class="dk-price">280₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="عصير جزر" data-tr="Havuç Suyu" data-en="Carrot Juice">عصير جزر</div></div><div class="dk-price">280₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="عصير تفاح" data-tr="Elma Suyu" data-en="Apple Juice">عصير تفاح</div></div><div class="dk-price">280₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="عصير رمان" data-tr="Nar Suyu" data-en="Pomegranate Juice">عصير رمان</div></div><div class="dk-price">320₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="عصير ليمونادة" data-tr="Limonata" data-en="Lemonade">عصير ليمونادة</div></div><div class="dk-price">240₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="موجيتو" data-tr="Mojito" data-en="Mojito">موجيتو</div></div><div class="dk-price">350₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سموذي فراولة" data-tr="Çilek Smoothie" data-en="Strawberry Smoothie">سموذي فراولة</div></div><div class="dk-price">420₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سموذي توت مشكل" data-tr="Karışık Meyve Smoothie" data-en="Mixed Berry Smoothie">سموذي توت مشكل</div></div><div class="dk-price">420₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سموذي مانجو" data-tr="Mango Smoothie" data-en="Mango Smoothie">سموذي مانجو</div></div><div class="dk-price">420₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سموذي ليمونادة" data-tr="Limonata Smoothie" data-en="Lemonade Smoothie">سموذي ليمونادة</div></div><div class="dk-price">380₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سموذي ليمونادة بالنعناع" data-tr="Naneli Limonata Smoothie" data-en="Mint Lemonade Smoothie">سموذي ليمونادة بالنعناع</div></div><div class="dk-price">390₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="أوريو ميلك شيك" data-tr="Oreo Milkshake" data-en="Oreo Milkshake">أوريو ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="سنيكرز ميلك شيك" data-tr="Snickers Milkshake" data-en="Snickers Milkshake">سنيكرز ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="كيت كات ميلك شيك" data-tr="KitKat Milkshake" data-en="KitKat Milkshake">كيت كات ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="شوكولاتة ميلك شيك" data-tr="Çikolata Milkshake" data-en="Chocolate Milkshake">شوكولاتة ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فانيليا ميلك شيك" data-tr="Vanilya Milkshake" data-en="Vanilla Milkshake">فانيليا ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فراولة ميلك شيك" data-tr="Çilek Milkshake" data-en="Strawberry Milkshake">فراولة ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="فراولة مع موز ميلك شيك" data-tr="Çilek Muzlu Milkshake" data-en="Strawberry Banana Milkshake">فراولة مع موز ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="توت مشكل ميلك شيك" data-tr="Karışık Meyve Milkshake" data-en="Mixed Berry Milkshake">توت مشكل ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="مانجو ميلك شيك" data-tr="Mango Milkshake" data-en="Mango Milkshake">مانجو ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="موز ميلك شيك" data-tr="Muz Milkshake" data-en="Banana Milkshake">موز ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="لوتس ميلك شيك" data-tr="Lotus Milkshake" data-en="Lotus Milkshake">لوتس ميلك شيك</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="بستاشيو فرابي" data-tr="Antep Fıstıklı Frappé" data-en="Pistachio Frappé">بستاشيو فرابي</div></div><div class="dk-price">480₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="أفوكادو" data-tr="Avokado" data-en="Avocado">أفوكادو</div></div><div class="dk-price">480₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="ماتشا آيس لاتيه" data-tr="Matcha Ice Latte" data-en="Matcha Ice Latte">ماتشا آيس لاتيه</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="آيس سبانش لاتيه" data-tr="Ice Spanish Latte" data-en="Ice Spanish Latte">آيس سبانش لاتيه</div></div><div class="dk-price">450₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="بابل تي فريز" data-tr="Bubble Tea Çilek" data-en="Bubble Tea Strawberry">بابل تي فريز</div></div><div class="dk-price">375₺</div></div>
+    <div class="drink-item"><div><div class="dk-name" data-ar="بابل تي توت" data-tr="Bubble Tea Yaban Mersini" data-en="Bubble Tea Blueberry">بابل تي توت</div></div><div class="dk-price">375₺</div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  14. حلويات
+══════════════════════════════════════ -->
+<section class="cat-section" id="s14">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="حلويات" data-tr="Tatlılar" data-en="Dessert">حلويات</h2>
+    <p class="cat-sub" data-ar="حلويات لذيذة تناسب جميع الأذواق" data-tr="Her zevke uygun lezzetli tatlılar" data-en="Delicious desserts for all tastes">حلويات لذيذة تناسب جميع الأذواق</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="items-grid">
+    <div class="menu-item"><div><div class="item-name" data-ar="بقلاوة باردة" data-tr="Soğuk Baklava" data-en="Cold Baklava">بقلاوة باردة</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="معمول بالجبنة" data-tr="Peynirli Mamoul" data-en="Cheese Maamoul">معمول بالجبنة</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="وافل الفواكه المشكلة" data-tr="Karışık Meyveli Waffle" data-en="Mixed Fruit Waffle"><div class="item-desc" data-ar="فراولة، كيوي، موز، شوكولا" data-tr="Çilek, kivi, muz, çikolata" data-en="Strawberry, kiwi, banana, chocolate">فراولة، كيوي، موز، شوكولا</div>وافل الفواكه المشكلة</div></div><div class="item-price">700<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="وافل الاوريو" data-tr="Oreo Waffle" data-en="Oreo Waffle"><div class="item-desc" data-ar="شوكولا أوريو" data-tr="Oreo çikolata" data-en="Oreo chocolate">شوكولا أوريو</div>وافل الاوريو</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوكولاتة وافل" data-tr="Çikolata Waffle" data-en="Chocolate Waffle"><div class="item-desc" data-ar="شوكولا" data-tr="Çikolata" data-en="Chocolate">شوكولا</div>شوكولاتة وافل</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="آيسكريم" data-tr="Dondurma" data-en="Ice Cream"><div class="item-desc" data-ar="3 كرات آيس كريم" data-tr="3 top dondurma" data-en="3 scoops of ice cream">3 كرات آيس كريم</div>آيسكريم</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بطيخ أحمر" data-tr="Karpuz" data-en="Watermelon">بطيخ أحمر</div></div><div class="item-price">480<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="صحن فواكه" data-tr="Meyve Tabağı" data-en="Fruit Plate">صحن فواكه</div></div><div class="item-price">1800<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="موالح" data-tr="Tuzlu Atıştırmalıklar" data-en="Salty Snacks">موالح</div></div><div class="item-price">450<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="شوكولاتة بانكيك" data-tr="Çikolatalı Pancake" data-en="Chocolate Pancake"><div class="item-desc" data-ar="3 طبقات بانكيك شوكولا" data-tr="3 katlı çikolatalı pancake" data-en="3 layers of chocolate pancakes">3 طبقات بانكيك شوكولا</div>شوكولاتة بانكيك</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بانكيك فواكه" data-tr="Meyveli Pancake" data-en="Fruit Pancake"><div class="item-desc" data-ar="3 طبقات بانكيك شوكولا، فراولة، موز، كيوي" data-tr="3 katlı çikolatalı pancake, çilek, muz, kivi" data-en="3 layers of chocolate pancakes, strawberry, banana, kiwi">3 طبقات - شوكولا، فراولة، موز، كيوي</div>بانكيك فواكه</div></div><div class="item-price">700<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="لوتس بانكيك" data-tr="Lotus Pancake" data-en="Lotus Pancake"><div class="item-desc" data-ar="3 طبقات بانكيك، بسكوت اللوتس، زبدة اللوتس" data-tr="3 katlı pancake, lotus bisküvisi, lotus tereyağı" data-en="3 layers of pancakes, Lotus biscuit, lotus butter">بسكوت اللوتس، زبدة اللوتس</div>لوتس بانكيك</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="اوريو بانكيك" data-tr="Oreo Pancake" data-en="Oreo Pancake"><div class="item-desc" data-ar="شوكولا 3 طبقات بانكيك أوريو" data-tr="Çikolata 3 katlı Oreo pancake" data-en="Chocolate 3 layers of Oreo pancakes">شوكولا 3 طبقات بانكيك أوريو</div>اوريو بانكيك</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كريب اوريو" data-tr="Oreo Crepe" data-en="Oreo Crepe"><div class="item-desc" data-ar="شوكولا أوريو" data-tr="Oreo çikolata" data-en="Oreo chocolate">شوكولا أوريو</div>كريب اوريو</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كريب فواكه" data-tr="Meyveli Crepe" data-en="Fruit Crepe"><div class="item-desc" data-ar="فراولة، شوكولا، موز، كيوي" data-tr="Çilek, çikolata, muz, kivi" data-en="Strawberry, chocolate, banana, kiwi">فراولة، شوكولا، موز، كيوي</div>كريب فواكه</div></div><div class="item-price">700<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كريب شوكولا" data-tr="Çikolatalı Crepe" data-en="Chocolate Crepe">كريب شوكولا</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سوفلا" data-tr="Sufle" data-en="Soufflé">سوفلا</div></div><div class="item-price">520<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فوندو" data-tr="Fondue" data-en="Fondue"><div class="item-desc" data-ar="شوكولا بحليب، فريز، موز، كيوي، بسكوت اللوتس" data-tr="Sütlü çikolata, çilek, muz, kivi, lotus bisküvisi" data-en="Chocolate with milk, strawberry, banana, kiwi, lotus biscuit">شوكولا بحليب، فريز، موز، كيوي، بسكوت اللوتس</div>فوندو</div></div><div class="item-price">620<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سان سباستيان تشيز كيك شوكولا" data-tr="San Sebastian Çikolatalı Cheesecake" data-en="San Sebastian Chocolate Cheesecake">سان سباستيان تشيز كيك شوكولا</div></div><div class="item-price">550<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="تريليتشه" data-tr="Trileçe (Tres Leches)" data-en="Tres Leches Cake">تريليتشه</div></div><div class="item-price">480<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="كيك حسب الطلب" data-tr="Sipariş Usulü Kek" data-en="Custom Cake (Order as per request)">كيك حسب الطلب</div></div><div class="item-price">520<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="فوتوتشيني كريب" data-tr="Fettuccine Krep" data-en="Fettuccine Crepe">فوتوتشيني كريب</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="بستاشيو كريب" data-tr="Antep Fıstıklı Crepe" data-en="Pistachio Crepe">بستاشيو كريب</div></div><div class="item-price">700<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="سوشي كريب" data-tr="Suşi Krep" data-en="Sushi Crepe">سوشي كريب</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="رول كريب اوريو" data-tr="Oreo Roll Crepe" data-en="Oreo Roll Crepe">رول كريب اوريو</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+    <div class="menu-item"><div><div class="item-name" data-ar="رول كريب شوكولا" data-tr="Çikolatalı Roll Crepe" data-en="Chocolate Roll Crepe">رول كريب شوكولا</div></div><div class="item-price">650<span class="lira">₺</span></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+  15. أرجيلة
+══════════════════════════════════════ -->
+<section class="cat-section dark" id="s15">
+  <div class="cat-header">
+    <h2 class="cat-title" data-ar="الأرجيلة" data-tr="Nargile" data-en="Shisha">الأرجيلة</h2>
+    <p class="cat-sub" data-ar="جلسات الأرجيلة الممتعة" data-tr="Keyifli nargile seansları" data-en="Enjoyable shisha sessions">جلسات الأرجيلة الممتعة</p>
+    <div class="cat-div"><span>✦</span></div>
+  </div>
+  <div class="hookah-grid">
+    <div class="hk-item"><span class="hk-name" data-ar="ليدي كيلر" data-tr="Lady Killer" data-en="Lady Killer">ليدي كيلر</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="لوف 66" data-tr="Love 66" data-en="Love 66">لوف 66</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="ليمون ونعنع" data-tr="Limon ve Nane" data-en="Lemon & Mint">ليمون ونعنع</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="تفاحتين (نخلة)" data-tr="İki Elma (Palmiye)" data-en="Two Apples (Palm Blend)">تفاحتين (نخلة)</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="عنب" data-tr="Üzüm" data-en="Grapes">عنب</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="عنب ونعنع" data-tr="Üzüm ve Nane" data-en="Grapes & Mint">عنب ونعنع</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="دراق" data-tr="Şeftali" data-en="Peaches">دراق</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="خلطة ياسمين" data-tr="Yasemin Karışımı" data-en="Jasmine Blend">خلطة ياسمين</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="بطيخ" data-tr="Karpuz" data-en="Watermelon">بطيخ</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="بطيخ ونعنع" data-tr="Karpuz ve Nane" data-en="Watermelon & Mint">بطيخ ونعنع</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="علكة" data-tr="Sakız" data-en="Gum (Chewing Gum)">علكة</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="علكة ونعنع" data-tr="Sakız ve Nane" data-en="Gum & Mint">علكة ونعنع</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="فريز" data-tr="Çilek" data-en="Strawberries">فريز</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="علكة وقرفة" data-tr="Sakız ve Tarçın" data-en="Gum & Cinnamon">علكة وقرفة</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="خلطة المستكة" data-tr="Mastic Karışımı" data-en="Mastic Blend">خلطة المستكة</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="بلوبيري" data-tr="Yaban Mersini" data-en="Blueberry">بلوبيري</span><span class="hk-price">1150₺</span></div>
+    <div class="hk-item"><span class="hk-name" data-ar="عنب توت" data-tr="Üzüm ve Meyve Karışımı" data-en="Grape & Berry Mix">عنب توت</span><span class="hk-price">1150₺</span></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="menu-footer">
+  <p>
+    <strong>Vezir Han Emirgan</strong><br/>
+    Sakıp Sabancı Cd. No:88 · 34467 Sarıyer / İstanbul<br/>
+    <a href="tel:+905321726415">+90 532 172 64 15</a> &nbsp;·&nbsp; <a href="mailto:vezir-han@hotmail.com">vezir-han@hotmail.com</a><br/>
+    <span data-ar="مفتوح 24 ساعة · 7 أيام في الأسبوع" data-tr="24 Saat Açık · Haftanın 7 Günü" data-en="Open 24 Hours · 7 Days a Week">مفتوح 24 ساعة · 7 أيام في الأسبوع</span>
+  </p>
+  <a href="vezirhan.html" class="back-btn" data-ar="← الموقع الرئيسي" data-tr="← Ana Sayfa" data-en="← Main Website">← الموقع الرئيسي</a>
+</div>
+
+<script>
+// ─── LANGUAGE SYSTEM ───────────────────────────────
+let currentLang = 'ar';
+
+function setLang(lang) {
+  currentLang = lang;
+  
+  // Update HTML dir and lang
+  const isRTL = lang === 'ar';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+  document.body.classList.toggle('ltr', !isRTL);
+  
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-' + lang).classList.add('active');
+  
+  // Update all translated elements
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val) el.innerHTML = val;
+  });
+  
+  // Update search placeholder
+  const inp = document.getElementById('searchInput');
+  const ph = {ar:'ابحث عن طبق أو مشروب...', tr:'Yemek veya içecek ara...', en:'Search for a dish or drink...'};
+  inp.placeholder = ph[lang];
+  inp.dir = isRTL ? 'rtl' : 'ltr';
+  
+  // Update no results text
+  const noR = document.getElementById('noResults');
+  const noT = {ar:'لا توجد نتائج مطابقة للبحث ☕', tr:'Sonuç bulunamadı ☕', en:'No results found ☕'};
+  noR.textContent = noT[lang];
+  
+  // Re-run search if active
+  const q = inp.value.trim();
+  if (q) inp.dispatchEvent(new Event('input'));
+}
+
+// ─── SEARCH ────────────────────────────────────────
+const inp = document.getElementById('searchInput');
+const noR = document.getElementById('noResults');
+inp.addEventListener('input', function(){
+  const q = this.value.trim().toLowerCase();
+  let total = 0;
+  document.querySelectorAll('.menu-item,.pkg-card,.drink-item,.hk-item').forEach(el=>{
+    const match = !q || el.textContent.toLowerCase().includes(q);
+    el.classList.toggle('hidden', !match);
+    if(match) total++;
+  });
+  document.querySelectorAll('.cat-section').forEach(sec=>{
+    if(!q){sec.style.display='';return;}
+    const vis = sec.querySelectorAll('.menu-item:not(.hidden),.pkg-card:not(.hidden),.drink-item:not(.hidden),.hk-item:not(.hidden)');
+    sec.style.display = vis.length ? '' : 'none';
+  });
+  noR.style.display = (q && total===0) ? 'block' : 'none';
+});
+
+// ─── ACTIVE NAV ────────────────────────────────────
+const secs = document.querySelectorAll('.cat-section[id]');
+const links = document.querySelectorAll('.cat-nav a');
+secs.forEach(s => new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.remove('active'));
+      const a=document.querySelector(`.cat-nav a[href="#${e.target.id}"]`);
+      if(a){a.classList.add('active');a.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});}
+    }
+  });
+},{threshold:0.2}).observe(s));
+</script>
+</body>
+</html>
