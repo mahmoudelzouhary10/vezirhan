@@ -19,13 +19,13 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 ::-webkit-scrollbar-track{background:var(--cream-d)}
 ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
 
-/* LANGUAGE SWITCHER */
+
 .lang-bar{background:var(--ink);border-bottom:1px solid rgba(184,151,58,.15);padding:8px 16px;display:flex;justify-content:center;gap:6px;position:sticky;top:0;z-index:200}
 .lang-btn{background:transparent;border:1px solid rgba(184,151,58,.3);color:rgba(255,255,255,.5);padding:5px 14px;font-size:12px;font-family:'Tajawal',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:.06em;border-radius:2px}
 .lang-btn:hover{border-color:var(--gold);color:var(--gold-l)}
 .lang-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:700}
 
-/* HERO */
+
 .hero{background:var(--ink2);padding:52px 24px 40px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(184,151,58,.1) 0%,transparent 70%)}
 .orn{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:16px}
@@ -36,14 +36,14 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 .hero-en{font-family:'Cormorant Garamond',serif;font-size:clamp(12px,2.5vw,16px);color:rgba(255,255,255,.35);letter-spacing:.2em;text-transform:uppercase;margin-top:6px}
 .hero-sub{color:rgba(255,255,255,.3);font-size:13px;margin-top:10px}
 
-/* STICKY NAV */
+
 .cat-nav{position:sticky;top:41px;z-index:100;background:var(--ink);border-bottom:1px solid rgba(184,151,58,.2);overflow-x:auto;white-space:nowrap;scrollbar-width:none}
 .cat-nav::-webkit-scrollbar{display:none}
 .cat-nav-inner{display:inline-flex;padding:0 8px}
 .cat-nav a{display:inline-block;padding:13px 14px;font-size:11.5px;font-weight:500;color:rgba(255,255,255,.4);text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
 .cat-nav a:hover,.cat-nav a.active{color:var(--gold-l);border-bottom-color:var(--gold)}
 
-/* SEARCH */
+
 .search-bar{background:var(--cream-d);padding:14px 20px;border-bottom:1px solid var(--border)}
 .search-wrap{position:relative;max-width:480px;margin:0 auto}
 .search-wrap svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
@@ -52,7 +52,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 #searchInput::placeholder{color:var(--muted)}
 #noResults{text-align:center;padding:40px;color:var(--muted);font-size:15px;display:none}
 
-/* SECTIONS */
+
 .cat-section{padding:44px 20px 32px;border-bottom:1px solid var(--border)}
 .cat-section:nth-child(even){background:var(--cream-d)}
 .cat-section.dark{background:var(--ink2)}
@@ -66,7 +66,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 .cat-div::after{background:linear-gradient(to left,transparent,var(--gold-d))}
 .cat-div span{color:var(--gold-d);font-size:13px}
 
-/* ITEMS GRID */
+
 .items-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
 @media(max-width:580px){.items-grid{grid-template-columns:1fr}}
 .menu-item{background:#fff;padding:16px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;transition:background .15s}
@@ -84,7 +84,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 .lira{font-size:12px;color:var(--muted);font-weight:400}
 .dark .lira{color:rgba(255,255,255,.3)}
 
-/* PACKAGES */
+
 .pkg-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:580px){.pkg-grid{grid-template-columns:1fr}}
 .pkg-card{background:#fff;border:1px solid var(--border);padding:22px 18px;position:relative;transition:border-color .2s,box-shadow .2s}
@@ -97,7 +97,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 .pkg-num{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold-d);font-weight:600}
 .pkg-cur{font-size:13px;color:var(--muted)}
 
-/* DRINKS */
+
 .drinks-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 @media(max-width:700px){.drinks-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:420px){.drinks-grid{grid-template-columns:1fr}}
@@ -108,7 +108,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 .dk-det{font-size:11px;color:var(--muted);margin-top:2px}
 .dk-price{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold-d);font-weight:600;white-space:nowrap;flex-shrink:0}
 
-/* HOOKAH */
+
 .hookah-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
 @media(max-width:560px){.hookah-grid{grid-template-columns:1fr 1fr}}
 .hk-item{background:var(--ink2);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.05)}
@@ -116,11 +116,11 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 .hk-name{font-size:13.5px;color:rgba(255,255,255,.8);font-weight:500}
 .hk-price{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold-l)}
 
-/* SUB LABEL */
+
 .sub-label{text-align:center;color:var(--gold-l);font-size:12px;letter-spacing:.14em;margin:24px 0 14px;text-transform:uppercase;opacity:.8}
 .dark .sub-label{color:var(--gold-l)}
 
-/* FOOTER */
+
 .menu-footer{background:var(--ink);padding:32px 20px;text-align:center}
 .menu-footer p{color:rgba(255,255,255,.3);font-size:12px;line-height:2.2}
 .menu-footer strong{color:var(--gold)}
@@ -128,7 +128,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--cream);color:var(--ink);o
 .back-btn{display:inline-block;margin-top:16px;padding:10px 28px;border:1px solid rgba(184,151,58,.4);color:var(--gold);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .2s}
 .back-btn:hover{background:var(--gold);color:var(--ink)}
 
-/* LTR OVERRIDE */
+
 body.ltr{direction:ltr;text-align:left}
 body.ltr .search-wrap svg{right:auto;left:12px}
 body.ltr #searchInput{padding:10px 14px 10px 40px;direction:ltr}
@@ -137,14 +137,14 @@ body.ltr .pkg-badge{left:auto;right:14px}
 </head>
 <body>
 
-<!-- LANGUAGE SWITCHER -->
+
 <div class="lang-bar">
   <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">العربية</button>
   <button class="lang-btn" onclick="setLang('tr')" id="btn-tr">Türkçe</button>
   <button class="lang-btn" onclick="setLang('en')" id="btn-en">English</button>
 </div>
 
-<!-- HERO -->
+
 <div class="hero">
   <div class="orn"><span>✦</span></div>
   <h1 class="hero-title" data-ar=" خان الوزير إميرجان" data-tr="Vezir Han Emirgan" data-en="Vezir Han Emirgan"> خان الوزير إميرجان</h1>
@@ -152,7 +152,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   <p class="hero-sub" data-ar="Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; مفتوح 24 ساعة" data-tr="Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; 24 Saat Açık" data-en="Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; Open 24 Hours">Sakıp Sabancı Cd. No:88 · Sarıyer · İstanbul &nbsp;|&nbsp; مفتوح 24 ساعة</p>
 </div>
 
-<!-- NAV -->
+
 <nav class="cat-nav">
   <div class="cat-nav-inner">
     <a href="#s1" data-ar="فطور مجموعات" data-tr="Kahvaltı Paketleri" data-en="Breakfast Sets">فطور مجموعات</a>
@@ -173,7 +173,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </nav>
 
-<!-- SEARCH -->
+
 <div class="search-bar">
   <div class="search-wrap">
     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/></svg>
@@ -182,9 +182,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
 </div>
 <div id="noResults" data-ar="لا توجد نتائج مطابقة للبحث ☕" data-tr="Sonuç bulunamadı ☕" data-en="No results found ☕">لا توجد نتائج مطابقة للبحث ☕</div>
 
-<!-- ══════════════════════════════════════
-  1. فطور المجموعات
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s1">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="فطور المجموعات" data-tr="Kahvaltı Paketleri" data-en="Breakfast Sets">فطور المجموعات</h2>
@@ -241,9 +239,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  2. فطور
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s2">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="فطور" data-tr="Kahvaltı" data-en="Breakfast">فطور</h2>
@@ -294,9 +290,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  3. معجنات
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s3">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="معجنات" data-tr="Kahvaltı Böreği" data-en="Breakfast Pastry">معجنات</h2>
@@ -328,9 +322,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  4. مازة باردة
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s4">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="مازة باردة" data-tr="Soğuk Mezeler" data-en="Cold Appetizers">مازة باردة</h2>
@@ -359,9 +351,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  5. مازة ساخنة
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s5">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="مازة ساخنة" data-tr="Sıcak Mezeler" data-en="Hot Appetizers">مازة ساخنة</h2>
@@ -389,9 +379,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  6. مازة غربية
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s6">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="مازة غربية" data-tr="Batı Mezeleri" data-en="Western Appetizers">مازة غربية</h2>
@@ -405,9 +393,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  7. سلطات غربية
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s7">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="سلطات غربية" data-tr="Batı Salatalar" data-en="Western Salads">سلطات غربية</h2>
@@ -423,9 +409,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  8. سلطات شرقية
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s8">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="سلطات شرقية" data-tr="Doğu Salatalar" data-en="Eastern Salads">سلطات شرقية</h2>
@@ -445,9 +429,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  9. مطبخ خان الوزير
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s9">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="مطبخ خان الوزير" data-tr="Vezirhan Mutfağı" data-en="Vezirhan Cuisine">مطبخ خان الوزير</h2>
@@ -484,9 +466,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  10. مشاوي
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s10">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="مشاوي" data-tr="Izgara" data-en="Barbecue">مشاوي</h2>
@@ -521,9 +501,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  11. أطباق عالمية
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s11">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="أطباق عالمية" data-tr="Dünya Mutfağı" data-en="World Cuisine">أطباق عالمية</h2>
@@ -549,9 +527,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  12. بيتزا
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s12">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="بيتزا" data-tr="Pizza" data-en="Pizza">بيتزا</h2>
@@ -571,9 +547,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  13. مشروبات
-══════════════════════════════════════ -->
+
 <section class="cat-section dark" id="s13">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="مشروبات" data-tr="İçecekler" data-en="Cold Drinks">مشروبات</h2>
@@ -672,9 +646,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  14. حلويات
-══════════════════════════════════════ -->
+
 <section class="cat-section" id="s14">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="حلويات" data-tr="Tatlılar" data-en="Dessert">حلويات</h2>
@@ -711,9 +683,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-  15. أرجيلة
-══════════════════════════════════════ -->
+
 <section class="cat-section dark" id="s15">
   <div class="cat-header">
     <h2 class="cat-title" data-ar="الأرجيلة" data-tr="Nargile" data-en="Shisha">الأرجيلة</h2>
@@ -741,7 +711,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
   </div>
 </section>
 
-<!-- FOOTER -->
+
 <div class="menu-footer">
   <p>
     <strong>Vezir Han Emirgan</strong><br/>
@@ -753,7 +723,7 @@ body.ltr .pkg-badge{left:auto;right:14px}
 </div>
 
 <script>
-// ─── LANGUAGE SYSTEM ───────────────────────────────
+
 let currentLang = 'ar';
 
 function setLang(lang) {
